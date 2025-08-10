@@ -1,4 +1,4 @@
-#include "../api/stock.grpc.pb.h"
+#include "stock.grpc.pb.h"
 #include "grpcpp/server_builder.h"
 #include "grpcpp/security/server_credentials.h"
 #include "spdlog/spdlog.h"

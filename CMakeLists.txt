@@ -21,28 +21,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(CLI11)
 
-# ---- Fetch Abseil (required for gRPC) ----
-FetchContent_Declare(
-        abseil
-        GIT_REPOSITORY https://github.com/abseil/abseil-cpp.git
-        GIT_TAG 20250512.1
-)
-set(ABSL_PROPAGATE_CXX_STD ON CACHE BOOL "" FORCE)
-set(ABSL_ENABLE_INSTALL ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(abseil)
+add_subdirectory(api)
 
-# ---- Fetch gRPC ----
-FetchContent_Declare(
-        gRPC
-        GIT_REPOSITORY https://github.com/grpc/grpc
-        GIT_TAG v1.74.1
-)
-FetchContent_MakeAvailable(gRPC)
-
-set(GENERATED_PROTO_SRCS
-        ${CMAKE_SOURCE_DIR}/api/stock.grpc.pb.cc
-        ${CMAKE_SOURCE_DIR}/api/stock.pb.cc
-)
-
-add_executable(listener src/main.cpp ${GENERATED_PROTO_SRCS})
-target_link_libraries(listener PRIVATE spdlog CLI11 grpc++)
+add_executable(listener src/main.cpp)
+target_link_libraries(listener PRIVATE spdlog CLI11 proto_lib)
