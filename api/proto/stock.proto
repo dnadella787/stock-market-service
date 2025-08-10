@@ -1,0 +1,16 @@
+syntax = 'proto3';
+
+service StockMarket {
+    rpc GetStock (GetStockRequest) returns (GetStockResponse);
+}
+
+message GetStockRequest {
+    string symbol = 1;
+}
+
+message GetStockResponse {
+    string symbol = 1;
+    string full_name = 2;
+    float current_price = 3;
+    float current_pe_ratio = 4;
+}
