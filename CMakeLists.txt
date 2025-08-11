@@ -23,5 +23,7 @@ FetchContent_MakeAvailable(CLI11)
 
 add_subdirectory(api)
 
-add_executable(listener src/main.cpp)
+add_executable(listener src/main.cpp
+        src/service/stock_market.cpp
+        src/service/stock_market.h)
 target_link_libraries(listener PRIVATE spdlog CLI11 proto_lib)
