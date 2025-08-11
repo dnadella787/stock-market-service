@@ -23,7 +23,7 @@ int main(const int argc, char* argv[]) {
     bool debug_log = true;
     std::string server_address;
 
-    CLI::App app{"Messaging client CLI"};
+    CLI::App app{"Start a gRPC server that returns stock market data"};
     app.add_flag("-d,--debug", debug_log, "Enable debug logging"); // note debug level defaults to true
     app.add_option("-s,--server_address", server_address, "Address of server in form [localIP]:[port] (i.e. 127.0.0.1:21000)")
         ->default_val("127.0.0.1:21000");
