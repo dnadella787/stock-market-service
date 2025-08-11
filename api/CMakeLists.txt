@@ -17,15 +17,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(gRPC)
 
 # Find all protobuf and gRPC generated files to build lib
-file(GLOB PROTO_SRCS
-        "${CMAKE_CURRENT_SOURCE_DIR}/*.pb.cc"
-        "${CMAKE_CURRENT_SOURCE_DIR}/*.grpc.pb.cc"
-)
-
-file(GLOB PROTO_HDRS
-        "${CMAKE_CURRENT_SOURCE_DIR}/*.pb.h"
-        "${CMAKE_CURRENT_SOURCE_DIR}/*.grpc.pb.h"
-)
+file(GLOB PROTO_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/*.pb.cc")
+file(GLOB PROTO_HDRS "${CMAKE_CURRENT_SOURCE_DIR}/*.pb.h")
 
 # Build lib
 add_library(proto_lib ${PROTO_SRCS} ${PROTO_HDRS})
