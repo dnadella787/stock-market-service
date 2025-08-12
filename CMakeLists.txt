@@ -25,5 +25,7 @@ add_subdirectory(api)
 
 add_executable(listener src/main.cpp
         src/service/stock_market.cpp
-        src/service/stock_market.h)
+        src/service/stock_market.h
+        src/db/postgres_client.cpp
+        src/db/postgres_client.h)
 target_link_libraries(listener PRIVATE spdlog CLI11 proto_lib)
