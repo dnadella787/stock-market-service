@@ -1,4 +1,4 @@
-syntax = 'proto3';
+syntax = "proto3";
 
 service StockMarket {
     rpc GetStock (GetStockRequest) returns (GetStockResponse);
@@ -9,6 +9,10 @@ message GetStockRequest {
 }
 
 message GetStockResponse {
+    Stock stock = 1;
+}
+
+message Stock {
     string symbol = 1;
     string full_name = 2;
     float current_price = 3;

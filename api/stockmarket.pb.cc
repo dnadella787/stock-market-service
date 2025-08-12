@@ -25,7 +25,7 @@ namespace _pb = ::google::protobuf;
 namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
 
-inline constexpr GetStockResponse::Impl_::Impl_(
+inline constexpr Stock::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         symbol_(
@@ -38,24 +38,24 @@ inline constexpr GetStockResponse::Impl_::Impl_(
         current_pe_ratio_{0} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR GetStockResponse::GetStockResponse(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR Stock::Stock(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(GetStockResponse_class_data_.base()),
+    : ::google::protobuf::Message(Stock_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(),
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct GetStockResponseDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR GetStockResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~GetStockResponseDefaultTypeInternal() {}
+struct StockDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR StockDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~StockDefaultTypeInternal() {}
   union {
-    GetStockResponse _instance;
+    Stock _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 GetStockResponseDefaultTypeInternal _GetStockResponse_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 StockDefaultTypeInternal _Stock_default_instance_;
 
 inline constexpr GetStockRequest::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -83,6 +83,31 @@ struct GetStockRequestDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 GetStockRequestDefaultTypeInternal _GetStockRequest_default_instance_;
+
+inline constexpr GetStockResponse::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        stock_{nullptr} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR GetStockResponse::GetStockResponse(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(GetStockResponse_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct GetStockResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR GetStockResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~GetStockResponseDefaultTypeInternal() {}
+  union {
+    GetStockResponse _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 GetStockResponseDefaultTypeInternal _GetStockResponse_default_instance_;
 static constexpr const ::_pb::EnumDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
     file_level_enum_descriptors_stockmarket_2eproto = nullptr;
 static constexpr const ::_pb::ServiceDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
@@ -97,11 +122,16 @@ const ::uint32_t
         0,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::GetStockResponse, _impl_._has_bits_),
+        4, // hasbit index offset
+        PROTOBUF_FIELD_OFFSET(::GetStockResponse, _impl_.stock_),
+        0,
+        0x081, // bitmap
+        PROTOBUF_FIELD_OFFSET(::Stock, _impl_._has_bits_),
         7, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::GetStockResponse, _impl_.symbol_),
-        PROTOBUF_FIELD_OFFSET(::GetStockResponse, _impl_.full_name_),
-        PROTOBUF_FIELD_OFFSET(::GetStockResponse, _impl_.current_price_),
-        PROTOBUF_FIELD_OFFSET(::GetStockResponse, _impl_.current_pe_ratio_),
+        PROTOBUF_FIELD_OFFSET(::Stock, _impl_.symbol_),
+        PROTOBUF_FIELD_OFFSET(::Stock, _impl_.full_name_),
+        PROTOBUF_FIELD_OFFSET(::Stock, _impl_.current_price_),
+        PROTOBUF_FIELD_OFFSET(::Stock, _impl_.current_pe_ratio_),
         0,
         1,
         2,
@@ -112,31 +142,34 @@ static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, sizeof(::GetStockRequest)},
         {5, sizeof(::GetStockResponse)},
+        {10, sizeof(::Stock)},
 };
 static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
     &::_GetStockRequest_default_instance_._instance,
     &::_GetStockResponse_default_instance_._instance,
+    &::_Stock_default_instance_._instance,
 };
 const char descriptor_table_protodef_stockmarket_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\021stockmarket.proto\"!\n\017GetStockRequest\022\016"
-    "\n\006symbol\030\001 \001(\t\"f\n\020GetStockResponse\022\016\n\006sy"
-    "mbol\030\001 \001(\t\022\021\n\tfull_name\030\002 \001(\t\022\025\n\rcurrent"
-    "_price\030\003 \001(\002\022\030\n\020current_pe_ratio\030\004 \001(\0022>"
-    "\n\013StockMarket\022/\n\010GetStock\022\020.GetStockRequ"
-    "est\032\021.GetStockResponseb\006proto3"
+    "\n\006symbol\030\001 \001(\t\")\n\020GetStockResponse\022\025\n\005st"
+    "ock\030\001 \001(\0132\006.Stock\"[\n\005Stock\022\016\n\006symbol\030\001 \001"
+    "(\t\022\021\n\tfull_name\030\002 \001(\t\022\025\n\rcurrent_price\030\003"
+    " \001(\002\022\030\n\020current_pe_ratio\030\004 \001(\0022>\n\013StockM"
+    "arket\022/\n\010GetStock\022\020.GetStockRequest\032\021.Ge"
+    "tStockResponseb\006proto3"
 };
 static ::absl::once_flag descriptor_table_stockmarket_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_stockmarket_2eproto = {
     false,
     false,
-    230,
+    262,
     descriptor_table_protodef_stockmarket_2eproto,
     "stockmarket.proto",
     &descriptor_table_stockmarket_2eproto_once,
     nullptr,
     0,
-    2,
+    3,
     schemas,
     file_default_instances,
     TableStruct_stockmarket_2eproto::offsets,
@@ -429,9 +462,7 @@ PROTOBUF_NDEBUG_INLINE GetStockResponse::Impl_::Impl_(
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
     const ::GetStockResponse& from_msg)
       : _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        symbol_(arena, from.symbol_),
-        full_name_(arena, from.full_name_) {}
+        _cached_size_{0} {}
 
 GetStockResponse::GetStockResponse(
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
@@ -446,31 +477,21 @@ GetStockResponse::GetStockResponse(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  ::memcpy(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, current_price_),
-           reinterpret_cast<const char *>(&from._impl_) +
-               offsetof(Impl_, current_price_),
-           offsetof(Impl_, current_pe_ratio_) -
-               offsetof(Impl_, current_price_) +
-               sizeof(Impl_::current_pe_ratio_));
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.stock_ = ((cached_has_bits & 0x00000001u) != 0)
+                ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.stock_)
+                : nullptr;
 
   // @@protoc_insertion_point(copy_constructor:GetStockResponse)
 }
 PROTOBUF_NDEBUG_INLINE GetStockResponse::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-      : _cached_size_{0},
-        symbol_(arena),
-        full_name_(arena) {}
+      : _cached_size_{0} {}
 
 inline void GetStockResponse::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, current_price_),
-           0,
-           offsetof(Impl_, current_pe_ratio_) -
-               offsetof(Impl_, current_price_) +
-               sizeof(Impl_::current_pe_ratio_));
+  _impl_.stock_ = {};
 }
 GetStockResponse::~GetStockResponse() {
   // @@protoc_insertion_point(destructor:GetStockResponse)
@@ -480,8 +501,7 @@ inline void GetStockResponse::SharedDtor(MessageLite& self) {
   GetStockResponse& this_ = static_cast<GetStockResponse&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.symbol_.Destroy();
-  this_._impl_.full_name_.Destroy();
+  delete this_._impl_.stock_;
   this_._impl_.~Impl_();
 }
 
@@ -491,7 +511,7 @@ inline void* PROTOBUF_NONNULL GetStockResponse::PlacementNew_(
   return ::new (mem) GetStockResponse(arena);
 }
 constexpr auto GetStockResponse::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(GetStockResponse),
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(GetStockResponse),
                                             alignof(GetStockResponse));
 }
 constexpr auto GetStockResponse::InternalGenerateClassData_() {
@@ -528,10 +548,282 @@ GetStockResponse::GetClassData() const {
   return GetStockResponse_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 0, 40, 2>
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2>
 GetStockResponse::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(GetStockResponse, _impl_._has_bits_),
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    GetStockResponse_class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::GetStockResponse>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // .Stock stock = 1;
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(GetStockResponse, _impl_.stock_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .Stock stock = 1;
+    {PROTOBUF_FIELD_OFFSET(GetStockResponse, _impl_.stock_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }},
+  {{
+      {::_pbi::TcParser::GetTable<::Stock>()},
+  }},
+  {{
+  }},
+};
+PROTOBUF_NOINLINE void GetStockResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:GetStockResponse)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  if ((cached_has_bits & 0x00000001u) != 0) {
+    ABSL_DCHECK(_impl_.stock_ != nullptr);
+    _impl_.stock_->Clear();
+  }
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+::uint8_t* PROTOBUF_NONNULL GetStockResponse::_InternalSerialize(
+    const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
+  const GetStockResponse& this_ = static_cast<const GetStockResponse&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+::uint8_t* PROTOBUF_NONNULL GetStockResponse::_InternalSerialize(
+    ::uint8_t* PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+  const GetStockResponse& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  // @@protoc_insertion_point(serialize_to_array_start:GetStockResponse)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = this_._impl_._has_bits_[0];
+  // .Stock stock = 1;
+  if ((cached_has_bits & 0x00000001u) != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        1, *this_._impl_.stock_, this_._impl_.stock_->GetCachedSize(), target,
+        stream);
+  }
+
+  if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:GetStockResponse)
+  return target;
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+::size_t GetStockResponse::ByteSizeLong(const MessageLite& base) {
+  const GetStockResponse& this_ = static_cast<const GetStockResponse&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+::size_t GetStockResponse::ByteSizeLong() const {
+  const GetStockResponse& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  // @@protoc_insertion_point(message_byte_size_start:GetStockResponse)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void)cached_has_bits;
+
+   {
+    // .Stock stock = 1;
+    cached_has_bits = this_._impl_._has_bits_[0];
+    if ((cached_has_bits & 0x00000001u) != 0) {
+      total_size += 1 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.stock_);
+    }
+  }
+  return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                             &this_._impl_._cached_size_);
+}
+
+void GetStockResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<GetStockResponse*>(&to_msg);
+  auto& from = static_cast<const GetStockResponse&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:GetStockResponse)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if ((cached_has_bits & 0x00000001u) != 0) {
+    ABSL_DCHECK(from._impl_.stock_ != nullptr);
+    if (_this->_impl_.stock_ == nullptr) {
+      _this->_impl_.stock_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.stock_);
+    } else {
+      _this->_impl_.stock_->MergeFrom(*from._impl_.stock_);
+    }
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void GetStockResponse::CopyFrom(const GetStockResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:GetStockResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void GetStockResponse::InternalSwap(GetStockResponse* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+  using ::std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  swap(_impl_.stock_, other->_impl_.stock_);
+}
+
+::google::protobuf::Metadata GetStockResponse::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class Stock::_Internal {
+ public:
+  using HasBits =
+      decltype(::std::declval<Stock>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(Stock, _impl_._has_bits_);
+};
+
+Stock::Stock(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, Stock_class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Stock)
+}
+PROTOBUF_NDEBUG_INLINE Stock::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+    const ::Stock& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        symbol_(arena, from.symbol_),
+        full_name_(arena, from.full_name_) {}
+
+Stock::Stock(
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
+    const Stock& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, Stock_class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  Stock* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, current_price_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, current_price_),
+           offsetof(Impl_, current_pe_ratio_) -
+               offsetof(Impl_, current_price_) +
+               sizeof(Impl_::current_pe_ratio_));
+
+  // @@protoc_insertion_point(copy_constructor:Stock)
+}
+PROTOBUF_NDEBUG_INLINE Stock::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+      : _cached_size_{0},
+        symbol_(arena),
+        full_name_(arena) {}
+
+inline void Stock::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, current_price_),
+           0,
+           offsetof(Impl_, current_pe_ratio_) -
+               offsetof(Impl_, current_price_) +
+               sizeof(Impl_::current_pe_ratio_));
+}
+Stock::~Stock() {
+  // @@protoc_insertion_point(destructor:Stock)
+  SharedDtor(*this);
+}
+inline void Stock::SharedDtor(MessageLite& self) {
+  Stock& this_ = static_cast<Stock&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.symbol_.Destroy();
+  this_._impl_.full_name_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* PROTOBUF_NONNULL Stock::PlacementNew_(
+    const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
+  return ::new (mem) Stock(arena);
+}
+constexpr auto Stock::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(Stock),
+                                            alignof(Stock));
+}
+constexpr auto Stock::InternalGenerateClassData_() {
+  return ::google::protobuf::internal::ClassDataFull{
+      ::google::protobuf::internal::ClassData{
+          &_Stock_default_instance_._instance,
+          &_table_.header,
+          nullptr,  // OnDemandRegisterArenaDtor
+          nullptr,  // IsInitialized
+          &Stock::MergeImpl,
+          ::google::protobuf::Message::GetNewImpl<Stock>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+          &Stock::SharedDtor,
+          ::google::protobuf::Message::GetClearImpl<Stock>(), &Stock::ByteSizeLong,
+              &Stock::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          PROTOBUF_FIELD_OFFSET(Stock, _impl_._cached_size_),
+          false,
+      },
+      &Stock::kDescriptorMethods,
+      &descriptor_table_stockmarket_2eproto,
+      nullptr,  // tracker
+  };
+}
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
+    ::google::protobuf::internal::ClassDataFull Stock_class_data_ =
+        Stock::InternalGenerateClassData_();
+
+PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
+Stock::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&Stock_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(Stock_class_data_.tc_table);
+  return Stock_class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 4, 0, 29, 2>
+Stock::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(Stock, _impl_._has_bits_),
     0, // no _extensions_
     4, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
@@ -540,51 +832,51 @@ GetStockResponse::_table_ = {
     4,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
-    GetStockResponse_class_data_.base(),
+    Stock_class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::GetStockResponse>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::Stock>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     // float current_pe_ratio = 4;
     {::_pbi::TcParser::FastF32S1,
-     {37, 3, 0, PROTOBUF_FIELD_OFFSET(GetStockResponse, _impl_.current_pe_ratio_)}},
+     {37, 3, 0, PROTOBUF_FIELD_OFFSET(Stock, _impl_.current_pe_ratio_)}},
     // string symbol = 1;
     {::_pbi::TcParser::FastUS1,
-     {10, 0, 0, PROTOBUF_FIELD_OFFSET(GetStockResponse, _impl_.symbol_)}},
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(Stock, _impl_.symbol_)}},
     // string full_name = 2;
     {::_pbi::TcParser::FastUS1,
-     {18, 1, 0, PROTOBUF_FIELD_OFFSET(GetStockResponse, _impl_.full_name_)}},
+     {18, 1, 0, PROTOBUF_FIELD_OFFSET(Stock, _impl_.full_name_)}},
     // float current_price = 3;
     {::_pbi::TcParser::FastF32S1,
-     {29, 2, 0, PROTOBUF_FIELD_OFFSET(GetStockResponse, _impl_.current_price_)}},
+     {29, 2, 0, PROTOBUF_FIELD_OFFSET(Stock, _impl_.current_price_)}},
   }}, {{
     65535, 65535
   }}, {{
     // string symbol = 1;
-    {PROTOBUF_FIELD_OFFSET(GetStockResponse, _impl_.symbol_), _Internal::kHasBitsOffset + 0, 0,
+    {PROTOBUF_FIELD_OFFSET(Stock, _impl_.symbol_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
     // string full_name = 2;
-    {PROTOBUF_FIELD_OFFSET(GetStockResponse, _impl_.full_name_), _Internal::kHasBitsOffset + 1, 0,
+    {PROTOBUF_FIELD_OFFSET(Stock, _impl_.full_name_), _Internal::kHasBitsOffset + 1, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
     // float current_price = 3;
-    {PROTOBUF_FIELD_OFFSET(GetStockResponse, _impl_.current_price_), _Internal::kHasBitsOffset + 2, 0,
+    {PROTOBUF_FIELD_OFFSET(Stock, _impl_.current_price_), _Internal::kHasBitsOffset + 2, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
     // float current_pe_ratio = 4;
-    {PROTOBUF_FIELD_OFFSET(GetStockResponse, _impl_.current_pe_ratio_), _Internal::kHasBitsOffset + 3, 0,
+    {PROTOBUF_FIELD_OFFSET(Stock, _impl_.current_pe_ratio_), _Internal::kHasBitsOffset + 3, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
   }},
   // no aux_entries
   {{
-    "\20\6\11\0\0\0\0\0"
-    "GetStockResponse"
+    "\5\6\11\0\0\0\0\0"
+    "Stock"
     "symbol"
     "full_name"
   }},
 };
-PROTOBUF_NOINLINE void GetStockResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:GetStockResponse)
+PROTOBUF_NOINLINE void Stock::Clear() {
+// @@protoc_insertion_point(message_clear_start:Stock)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -609,17 +901,17 @@ PROTOBUF_NOINLINE void GetStockResponse::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::uint8_t* PROTOBUF_NONNULL GetStockResponse::_InternalSerialize(
+::uint8_t* PROTOBUF_NONNULL Stock::_InternalSerialize(
     const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
     ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
-  const GetStockResponse& this_ = static_cast<const GetStockResponse&>(base);
+  const Stock& this_ = static_cast<const Stock&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-::uint8_t* PROTOBUF_NONNULL GetStockResponse::_InternalSerialize(
+::uint8_t* PROTOBUF_NONNULL Stock::_InternalSerialize(
     ::uint8_t* PROTOBUF_NONNULL target,
     ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-  const GetStockResponse& this_ = *this;
+  const Stock& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(serialize_to_array_start:GetStockResponse)
+  // @@protoc_insertion_point(serialize_to_array_start:Stock)
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
@@ -628,7 +920,7 @@ PROTOBUF_NOINLINE void GetStockResponse::Clear() {
     if (!this_._internal_symbol().empty()) {
       const ::std::string& _s = this_._internal_symbol();
       ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "GetStockResponse.symbol");
+          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Stock.symbol");
       target = stream->WriteStringMaybeAliased(1, _s, target);
     }
   }
@@ -638,7 +930,7 @@ PROTOBUF_NOINLINE void GetStockResponse::Clear() {
     if (!this_._internal_full_name().empty()) {
       const ::std::string& _s = this_._internal_full_name();
       ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "GetStockResponse.full_name");
+          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Stock.full_name");
       target = stream->WriteStringMaybeAliased(2, _s, target);
     }
   }
@@ -666,18 +958,18 @@ PROTOBUF_NOINLINE void GetStockResponse::Clear() {
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:GetStockResponse)
+  // @@protoc_insertion_point(serialize_to_array_end:Stock)
   return target;
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::size_t GetStockResponse::ByteSizeLong(const MessageLite& base) {
-  const GetStockResponse& this_ = static_cast<const GetStockResponse&>(base);
+::size_t Stock::ByteSizeLong(const MessageLite& base) {
+  const Stock& this_ = static_cast<const Stock&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-::size_t GetStockResponse::ByteSizeLong() const {
-  const GetStockResponse& this_ = *this;
+::size_t Stock::ByteSizeLong() const {
+  const Stock& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(message_byte_size_start:GetStockResponse)
+  // @@protoc_insertion_point(message_byte_size_start:Stock)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
@@ -718,10 +1010,10 @@ PROTOBUF_NOINLINE void GetStockResponse::Clear() {
                                              &this_._impl_._cached_size_);
 }
 
-void GetStockResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<GetStockResponse*>(&to_msg);
-  auto& from = static_cast<const GetStockResponse&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:GetStockResponse)
+void Stock::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<Stock*>(&to_msg);
+  auto& from = static_cast<const Stock&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Stock)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -761,15 +1053,15 @@ void GetStockResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const 
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void GetStockResponse::CopyFrom(const GetStockResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:GetStockResponse)
+void Stock::CopyFrom(const Stock& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Stock)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void GetStockResponse::InternalSwap(GetStockResponse* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+void Stock::InternalSwap(Stock* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   using ::std::swap;
   auto* arena = GetArena();
   ABSL_DCHECK_EQ(arena, other->GetArena());
@@ -778,14 +1070,14 @@ void GetStockResponse::InternalSwap(GetStockResponse* PROTOBUF_RESTRICT PROTOBUF
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.symbol_, &other->_impl_.symbol_, arena);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.full_name_, &other->_impl_.full_name_, arena);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(GetStockResponse, _impl_.current_pe_ratio_)
-      + sizeof(GetStockResponse::_impl_.current_pe_ratio_)
-      - PROTOBUF_FIELD_OFFSET(GetStockResponse, _impl_.current_price_)>(
+      PROTOBUF_FIELD_OFFSET(Stock, _impl_.current_pe_ratio_)
+      + sizeof(Stock::_impl_.current_pe_ratio_)
+      - PROTOBUF_FIELD_OFFSET(Stock, _impl_.current_price_)>(
           reinterpret_cast<char*>(&_impl_.current_price_),
           reinterpret_cast<char*>(&other->_impl_.current_price_));
 }
 
-::google::protobuf::Metadata GetStockResponse::GetMetadata() const {
+::google::protobuf::Metadata Stock::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

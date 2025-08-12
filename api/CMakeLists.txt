@@ -24,7 +24,7 @@ set(proto_hdrs "${CMAKE_CURRENT_SOURCE_DIR}/stockmarket.pb.h")
 set(grpc_srcs "${CMAKE_CURRENT_SOURCE_DIR}/stockmarket.grpc.pb.cc")
 set(grpc_hdrs "${CMAKE_CURRENT_SOURCE_DIR}/stockmarket.grpc.pb.h")
 set(protobuf_loc "/Users/dhanushnadella/Downloads/protoc-31.1-osx-aarch_64/bin/protoc")
-set(grpc_cpp_plugin_loc "/opt/homebrew/Cellar/grpc/1.74.1/bin/grpc_cpp_plugin")
+set(grpc_cpp_plugin_loc "${grpc_BINARY_DIR}/grpc_cpp_plugin")
 add_custom_command(
         OUTPUT "${proto_srcs}" "${proto_hdrs}" "${grpc_srcs}" "${grpc_hdrs}"
         COMMAND ${protobuf_loc}
