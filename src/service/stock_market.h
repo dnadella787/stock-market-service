@@ -4,7 +4,7 @@
 
 #ifndef STOCK_MARKET_H
 #define STOCK_MARKET_H
-#include "stock.grpc.pb.h"
+#include "stockmarket.grpc.pb.h"
 
 namespace service {
 

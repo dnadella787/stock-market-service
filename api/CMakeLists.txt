@@ -16,12 +16,27 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(gRPC)
 
-# Find all protobuf and gRPC generated files to build lib
-file(GLOB PROTO_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/*.pb.cc")
-file(GLOB PROTO_HDRS "${CMAKE_CURRENT_SOURCE_DIR}/*.pb.h")
+# Generate the gRPC and protobuf source files
+# TODO: Find the protoc and grpc_cpp_plugin executables dynamically
+file(GLOB proto_files "${CMAKE_CURRENT_SOURCE_DIR}/proto/*.proto")
+set(proto_srcs "${CMAKE_CURRENT_SOURCE_DIR}/stockmarket.pb.cc")
+set(proto_hdrs "${CMAKE_CURRENT_SOURCE_DIR}/stockmarket.pb.h")
+set(grpc_srcs "${CMAKE_CURRENT_SOURCE_DIR}/stockmarket.grpc.pb.cc")
+set(grpc_hdrs "${CMAKE_CURRENT_SOURCE_DIR}/stockmarket.grpc.pb.h")
+set(protobuf_loc "/Users/dhanushnadella/Downloads/protoc-31.1-osx-aarch_64/bin/protoc")
+set(grpc_cpp_plugin_loc "/opt/homebrew/Cellar/grpc/1.74.1/bin/grpc_cpp_plugin")
+add_custom_command(
+        OUTPUT "${proto_srcs}" "${proto_hdrs}" "${grpc_srcs}" "${grpc_hdrs}"
+        COMMAND ${protobuf_loc}
+        ARGS --grpc_out "${CMAKE_CURRENT_SOURCE_DIR}"
+        --cpp_out "${CMAKE_CURRENT_SOURCE_DIR}"
+        -I "${CMAKE_CURRENT_SOURCE_DIR}/proto"
+        --plugin=protoc-gen-grpc="${grpc_cpp_plugin_loc}"
+        "${proto_files}"
+        DEPENDS "${proto_files}")
 
 # Build lib
-add_library(proto_lib ${PROTO_SRCS} ${PROTO_HDRS})
+add_library(proto_lib ${proto_srcs} ${proto_hdrs} ${grpc_srcs} ${grpc_hdrs})
 
 # Ensure this library's headers are visible to anything that links it
 target_include_directories(proto_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
