@@ -2,6 +2,7 @@ syntax = "proto3";
 
 service StockMarket {
     rpc GetStock (GetStockRequest) returns (GetStockResponse);
+    rpc ListStocks (ListStockRequest) returns (ListStockResponse);
 }
 
 message GetStockRequest {
@@ -12,9 +13,26 @@ message GetStockResponse {
     Stock stock = 1;
 }
 
+message ListStockRequest {
+    int32 page_size = 1;
+    string page_token = 2;
+}
+
+message ListStockResponse {
+    repeated Stock stocks = 1;
+    string next_page_token = 2;
+}
+
 message Stock {
     string symbol = 1;
     string full_name = 2;
-    float current_price = 3;
-    float current_pe_ratio = 4;
+    Currency currency = 3;
+    float current_price = 4;
+    float current_pe_ratio = 5;
+}
+
+enum Currency {
+    USD = 0;
+    EUR = 1;
+    HKD = 2;
 }

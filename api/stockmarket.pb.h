@@ -28,6 +28,7 @@
 #include "google/protobuf/message_lite.h"
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
+#include "google/protobuf/generated_enum_reflection.h"
 #include "google/protobuf/unknown_field_set.h"
 // @@protoc_insertion_point(includes)
 
@@ -52,6 +53,8 @@ struct TableStruct_stockmarket_2eproto {
 extern "C" {
 extern const ::google::protobuf::internal::DescriptorTable descriptor_table_stockmarket_2eproto;
 }  // extern "C"
+enum Currency : int;
+extern const uint32_t Currency_internal_data_[];
 class GetStockRequest;
 struct GetStockRequestDefaultTypeInternal;
 extern GetStockRequestDefaultTypeInternal _GetStockRequest_default_instance_;
@@ -60,15 +63,63 @@ class GetStockResponse;
 struct GetStockResponseDefaultTypeInternal;
 extern GetStockResponseDefaultTypeInternal _GetStockResponse_default_instance_;
 extern const ::google::protobuf::internal::ClassDataFull GetStockResponse_class_data_;
+class ListStockRequest;
+struct ListStockRequestDefaultTypeInternal;
+extern ListStockRequestDefaultTypeInternal _ListStockRequest_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull ListStockRequest_class_data_;
+class ListStockResponse;
+struct ListStockResponseDefaultTypeInternal;
+extern ListStockResponseDefaultTypeInternal _ListStockResponse_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull ListStockResponse_class_data_;
 class Stock;
 struct StockDefaultTypeInternal;
 extern StockDefaultTypeInternal _Stock_default_instance_;
 extern const ::google::protobuf::internal::ClassDataFull Stock_class_data_;
 namespace google {
 namespace protobuf {
+template <>
+internal::EnumTraitsT<::Currency_internal_data_>
+    internal::EnumTraitsImpl::value<::Currency>;
 }  // namespace protobuf
 }  // namespace google
 
+enum Currency : int {
+  USD = 0,
+  EUR = 1,
+  HKD = 2,
+  Currency_INT_MIN_SENTINEL_DO_NOT_USE_ =
+      ::std::numeric_limits<::int32_t>::min(),
+  Currency_INT_MAX_SENTINEL_DO_NOT_USE_ =
+      ::std::numeric_limits<::int32_t>::max(),
+};
+
+extern const uint32_t Currency_internal_data_[];
+inline constexpr Currency Currency_MIN =
+    static_cast<Currency>(0);
+inline constexpr Currency Currency_MAX =
+    static_cast<Currency>(2);
+inline bool Currency_IsValid(int value) {
+  return 0 <= value && value <= 2;
+}
+inline constexpr int Currency_ARRAYSIZE = 2 + 1;
+const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL Currency_descriptor();
+template <typename T>
+const ::std::string& Currency_Name(T value) {
+  static_assert(::std::is_same<T, Currency>::value ||
+                    ::std::is_integral<T>::value,
+                "Incorrect type passed to Currency_Name().");
+  return Currency_Name(static_cast<Currency>(value));
+}
+template <>
+inline const ::std::string& Currency_Name(Currency value) {
+  return ::google::protobuf::internal::NameOfDenseEnum<Currency_descriptor, 0, 2>(
+      static_cast<int>(value));
+}
+inline bool Currency_Parse(
+    ::absl::string_view name, Currency* PROTOBUF_NONNULL value) {
+  return ::google::protobuf::internal::ParseNamedEnum<Currency>(Currency_descriptor(), name,
+                                           value);
+}
 
 // ===================================================================
 
@@ -130,7 +181,7 @@ class Stock final : public ::google::protobuf::Message
     return *reinterpret_cast<const Stock*>(
         &_Stock_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 2;
+  static constexpr int kIndexInFileMessages = 4;
   friend void swap(Stock& a, Stock& b) { a.Swap(&b); }
   inline void Swap(Stock* PROTOBUF_NONNULL other) {
     if (other == this) return;
@@ -220,8 +271,9 @@ class Stock final : public ::google::protobuf::Message
   enum : int {
     kSymbolFieldNumber = 1,
     kFullNameFieldNumber = 2,
-    kCurrentPriceFieldNumber = 3,
-    kCurrentPeRatioFieldNumber = 4,
+    kCurrencyFieldNumber = 3,
+    kCurrentPriceFieldNumber = 4,
+    kCurrentPeRatioFieldNumber = 5,
   };
   // string symbol = 1;
   void clear_symbol() ;
@@ -253,7 +305,17 @@ class Stock final : public ::google::protobuf::Message
   ::std::string* PROTOBUF_NONNULL _internal_mutable_full_name();
 
   public:
-  // float current_price = 3;
+  // .Currency currency = 3;
+  void clear_currency() ;
+  ::Currency currency() const;
+  void set_currency(::Currency value);
+
+  private:
+  ::Currency _internal_currency() const;
+  void _internal_set_currency(::Currency value);
+
+  public:
+  // float current_price = 4;
   void clear_current_price() ;
   float current_price() const;
   void set_current_price(float value);
@@ -263,7 +325,7 @@ class Stock final : public ::google::protobuf::Message
   void _internal_set_current_price(float value);
 
   public:
-  // float current_pe_ratio = 4;
+  // float current_pe_ratio = 5;
   void clear_current_pe_ratio() ;
   float current_pe_ratio() const;
   void set_current_pe_ratio(float value);
@@ -277,7 +339,7 @@ class Stock final : public ::google::protobuf::Message
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<2, 4,
+  static const ::google::protobuf::internal::TcParseTable<3, 5,
                                    0, 29,
                                    2>
       _table_;
@@ -301,6 +363,7 @@ class Stock final : public ::google::protobuf::Message
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::ArenaStringPtr symbol_;
     ::google::protobuf::internal::ArenaStringPtr full_name_;
+    int currency_;
     float current_price_;
     float current_pe_ratio_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -310,6 +373,214 @@ class Stock final : public ::google::protobuf::Message
 };
 
 extern const ::google::protobuf::internal::ClassDataFull Stock_class_data_;
+// -------------------------------------------------------------------
+
+class ListStockRequest final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:ListStockRequest) */ {
+ public:
+  inline ListStockRequest() : ListStockRequest(nullptr) {}
+  ~ListStockRequest() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(ListStockRequest* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(ListStockRequest));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR ListStockRequest(::google::protobuf::internal::ConstantInitialized);
+
+  inline ListStockRequest(const ListStockRequest& from) : ListStockRequest(nullptr, from) {}
+  inline ListStockRequest(ListStockRequest&& from) noexcept
+      : ListStockRequest(nullptr, ::std::move(from)) {}
+  inline ListStockRequest& operator=(const ListStockRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ListStockRequest& operator=(ListStockRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ListStockRequest& default_instance() {
+    return *reinterpret_cast<const ListStockRequest*>(
+        &_ListStockRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 2;
+  friend void swap(ListStockRequest& a, ListStockRequest& b) { a.Swap(&b); }
+  inline void Swap(ListStockRequest* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ListStockRequest* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ListStockRequest* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<ListStockRequest>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const ListStockRequest& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const ListStockRequest& from) { ListStockRequest::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(ListStockRequest* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "ListStockRequest"; }
+
+ protected:
+  explicit ListStockRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  ListStockRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const ListStockRequest& from);
+  ListStockRequest(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, ListStockRequest&& from) noexcept
+      : ListStockRequest(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kPageTokenFieldNumber = 2,
+    kPageSizeFieldNumber = 1,
+  };
+  // string page_token = 2;
+  void clear_page_token() ;
+  const ::std::string& page_token() const;
+  template <typename Arg_ = const ::std::string&, typename... Args_>
+  void set_page_token(Arg_&& arg, Args_... args);
+  ::std::string* PROTOBUF_NONNULL mutable_page_token();
+  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_page_token();
+  void set_allocated_page_token(::std::string* PROTOBUF_NULLABLE value);
+
+  private:
+  const ::std::string& _internal_page_token() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_page_token(const ::std::string& value);
+  ::std::string* PROTOBUF_NONNULL _internal_mutable_page_token();
+
+  public:
+  // int32 page_size = 1;
+  void clear_page_size() ;
+  ::int32_t page_size() const;
+  void set_page_size(::int32_t value);
+
+  private:
+  ::int32_t _internal_page_size() const;
+  void _internal_set_page_size(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:ListStockRequest)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
+                                   0, 35,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const ListStockRequest& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::internal::ArenaStringPtr page_token_;
+    ::int32_t page_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_stockmarket_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull ListStockRequest_class_data_;
 // -------------------------------------------------------------------
 
 class GetStockRequest final : public ::google::protobuf::Message
@@ -506,6 +777,221 @@ class GetStockRequest final : public ::google::protobuf::Message
 };
 
 extern const ::google::protobuf::internal::ClassDataFull GetStockRequest_class_data_;
+// -------------------------------------------------------------------
+
+class ListStockResponse final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:ListStockResponse) */ {
+ public:
+  inline ListStockResponse() : ListStockResponse(nullptr) {}
+  ~ListStockResponse() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(ListStockResponse* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(ListStockResponse));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR ListStockResponse(::google::protobuf::internal::ConstantInitialized);
+
+  inline ListStockResponse(const ListStockResponse& from) : ListStockResponse(nullptr, from) {}
+  inline ListStockResponse(ListStockResponse&& from) noexcept
+      : ListStockResponse(nullptr, ::std::move(from)) {}
+  inline ListStockResponse& operator=(const ListStockResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ListStockResponse& operator=(ListStockResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ListStockResponse& default_instance() {
+    return *reinterpret_cast<const ListStockResponse*>(
+        &_ListStockResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 3;
+  friend void swap(ListStockResponse& a, ListStockResponse& b) { a.Swap(&b); }
+  inline void Swap(ListStockResponse* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ListStockResponse* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ListStockResponse* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<ListStockResponse>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const ListStockResponse& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const ListStockResponse& from) { ListStockResponse::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(ListStockResponse* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "ListStockResponse"; }
+
+ protected:
+  explicit ListStockResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  ListStockResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const ListStockResponse& from);
+  ListStockResponse(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, ListStockResponse&& from) noexcept
+      : ListStockResponse(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kStocksFieldNumber = 1,
+    kNextPageTokenFieldNumber = 2,
+  };
+  // repeated .Stock stocks = 1;
+  int stocks_size() const;
+  private:
+  int _internal_stocks_size() const;
+
+  public:
+  void clear_stocks() ;
+  ::Stock* PROTOBUF_NONNULL mutable_stocks(int index);
+  ::google::protobuf::RepeatedPtrField<::Stock>* PROTOBUF_NONNULL mutable_stocks();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::Stock>& _internal_stocks() const;
+  ::google::protobuf::RepeatedPtrField<::Stock>* PROTOBUF_NONNULL _internal_mutable_stocks();
+  public:
+  const ::Stock& stocks(int index) const;
+  ::Stock* PROTOBUF_NONNULL add_stocks();
+  const ::google::protobuf::RepeatedPtrField<::Stock>& stocks() const;
+  // string next_page_token = 2;
+  void clear_next_page_token() ;
+  const ::std::string& next_page_token() const;
+  template <typename Arg_ = const ::std::string&, typename... Args_>
+  void set_next_page_token(Arg_&& arg, Args_... args);
+  ::std::string* PROTOBUF_NONNULL mutable_next_page_token();
+  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_next_page_token();
+  void set_allocated_next_page_token(::std::string* PROTOBUF_NULLABLE value);
+
+  private:
+  const ::std::string& _internal_next_page_token() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_next_page_token(const ::std::string& value);
+  ::std::string* PROTOBUF_NONNULL _internal_mutable_next_page_token();
+
+  public:
+  // @@protoc_insertion_point(class_scope:ListStockResponse)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
+                                   1, 41,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const ListStockResponse& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::RepeatedPtrField< ::Stock > stocks_;
+    ::google::protobuf::internal::ArenaStringPtr next_page_token_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_stockmarket_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull ListStockResponse_class_data_;
 // -------------------------------------------------------------------
 
 class GetStockResponse final : public ::google::protobuf::Message
@@ -888,6 +1374,218 @@ inline void GetStockResponse::set_allocated_stock(::Stock* PROTOBUF_NULLABLE val
 
 // -------------------------------------------------------------------
 
+// ListStockRequest
+
+// int32 page_size = 1;
+inline void ListStockRequest::clear_page_size() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.page_size_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline ::int32_t ListStockRequest::page_size() const {
+  // @@protoc_insertion_point(field_get:ListStockRequest.page_size)
+  return _internal_page_size();
+}
+inline void ListStockRequest::set_page_size(::int32_t value) {
+  _internal_set_page_size(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:ListStockRequest.page_size)
+}
+inline ::int32_t ListStockRequest::_internal_page_size() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.page_size_;
+}
+inline void ListStockRequest::_internal_set_page_size(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.page_size_ = value;
+}
+
+// string page_token = 2;
+inline void ListStockRequest::clear_page_token() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.page_token_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const ::std::string& ListStockRequest::page_token() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:ListStockRequest.page_token)
+  return _internal_page_token();
+}
+template <typename Arg_, typename... Args_>
+PROTOBUF_ALWAYS_INLINE void ListStockRequest::set_page_token(Arg_&& arg, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.page_token_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:ListStockRequest.page_token)
+}
+inline ::std::string* PROTOBUF_NONNULL ListStockRequest::mutable_page_token()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::std::string* _s = _internal_mutable_page_token();
+  // @@protoc_insertion_point(field_mutable:ListStockRequest.page_token)
+  return _s;
+}
+inline const ::std::string& ListStockRequest::_internal_page_token() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.page_token_.Get();
+}
+inline void ListStockRequest::_internal_set_page_token(const ::std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.page_token_.Set(value, GetArena());
+}
+inline ::std::string* PROTOBUF_NONNULL ListStockRequest::_internal_mutable_page_token() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  return _impl_.page_token_.Mutable( GetArena());
+}
+inline ::std::string* PROTOBUF_NULLABLE ListStockRequest::release_page_token() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:ListStockRequest.page_token)
+  if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* released = _impl_.page_token_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.page_token_.Set("", GetArena());
+  }
+  return released;
+}
+inline void ListStockRequest::set_allocated_page_token(::std::string* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.page_token_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.page_token_.IsDefault()) {
+    _impl_.page_token_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:ListStockRequest.page_token)
+}
+
+// -------------------------------------------------------------------
+
+// ListStockResponse
+
+// repeated .Stock stocks = 1;
+inline int ListStockResponse::_internal_stocks_size() const {
+  return _internal_stocks().size();
+}
+inline int ListStockResponse::stocks_size() const {
+  return _internal_stocks_size();
+}
+inline void ListStockResponse::clear_stocks() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.stocks_.Clear();
+}
+inline ::Stock* PROTOBUF_NONNULL ListStockResponse::mutable_stocks(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:ListStockResponse.stocks)
+  return _internal_mutable_stocks()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::Stock>* PROTOBUF_NONNULL ListStockResponse::mutable_stocks()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:ListStockResponse.stocks)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_stocks();
+}
+inline const ::Stock& ListStockResponse::stocks(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:ListStockResponse.stocks)
+  return _internal_stocks().Get(index);
+}
+inline ::Stock* PROTOBUF_NONNULL ListStockResponse::add_stocks()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::Stock* _add = _internal_mutable_stocks()->Add();
+  // @@protoc_insertion_point(field_add:ListStockResponse.stocks)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::Stock>& ListStockResponse::stocks() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:ListStockResponse.stocks)
+  return _internal_stocks();
+}
+inline const ::google::protobuf::RepeatedPtrField<::Stock>&
+ListStockResponse::_internal_stocks() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.stocks_;
+}
+inline ::google::protobuf::RepeatedPtrField<::Stock>* PROTOBUF_NONNULL
+ListStockResponse::_internal_mutable_stocks() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.stocks_;
+}
+
+// string next_page_token = 2;
+inline void ListStockResponse::clear_next_page_token() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.next_page_token_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const ::std::string& ListStockResponse::next_page_token() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:ListStockResponse.next_page_token)
+  return _internal_next_page_token();
+}
+template <typename Arg_, typename... Args_>
+PROTOBUF_ALWAYS_INLINE void ListStockResponse::set_next_page_token(Arg_&& arg, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.next_page_token_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:ListStockResponse.next_page_token)
+}
+inline ::std::string* PROTOBUF_NONNULL ListStockResponse::mutable_next_page_token()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::std::string* _s = _internal_mutable_next_page_token();
+  // @@protoc_insertion_point(field_mutable:ListStockResponse.next_page_token)
+  return _s;
+}
+inline const ::std::string& ListStockResponse::_internal_next_page_token() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.next_page_token_.Get();
+}
+inline void ListStockResponse::_internal_set_next_page_token(const ::std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.next_page_token_.Set(value, GetArena());
+}
+inline ::std::string* PROTOBUF_NONNULL ListStockResponse::_internal_mutable_next_page_token() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  return _impl_.next_page_token_.Mutable( GetArena());
+}
+inline ::std::string* PROTOBUF_NULLABLE ListStockResponse::release_next_page_token() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:ListStockResponse.next_page_token)
+  if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* released = _impl_.next_page_token_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.next_page_token_.Set("", GetArena());
+  }
+  return released;
+}
+inline void ListStockResponse::set_allocated_next_page_token(::std::string* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.next_page_token_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.next_page_token_.IsDefault()) {
+    _impl_.next_page_token_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:ListStockResponse.next_page_token)
+}
+
+// -------------------------------------------------------------------
+
 // Stock
 
 // string symbol = 1;
@@ -1020,11 +1718,35 @@ inline void Stock::set_allocated_full_name(::std::string* PROTOBUF_NULLABLE valu
   // @@protoc_insertion_point(field_set_allocated:Stock.full_name)
 }
 
-// float current_price = 3;
+// .Currency currency = 3;
+inline void Stock::clear_currency() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.currency_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
+inline ::Currency Stock::currency() const {
+  // @@protoc_insertion_point(field_get:Stock.currency)
+  return _internal_currency();
+}
+inline void Stock::set_currency(::Currency value) {
+  _internal_set_currency(value);
+  _impl_._has_bits_[0] |= 0x00000004u;
+  // @@protoc_insertion_point(field_set:Stock.currency)
+}
+inline ::Currency Stock::_internal_currency() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::Currency>(_impl_.currency_);
+}
+inline void Stock::_internal_set_currency(::Currency value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.currency_ = value;
+}
+
+// float current_price = 4;
 inline void Stock::clear_current_price() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.current_price_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline float Stock::current_price() const {
   // @@protoc_insertion_point(field_get:Stock.current_price)
@@ -1032,7 +1754,7 @@ inline float Stock::current_price() const {
 }
 inline void Stock::set_current_price(float value) {
   _internal_set_current_price(value);
-  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_._has_bits_[0] |= 0x00000008u;
   // @@protoc_insertion_point(field_set:Stock.current_price)
 }
 inline float Stock::_internal_current_price() const {
@@ -1044,11 +1766,11 @@ inline void Stock::_internal_set_current_price(float value) {
   _impl_.current_price_ = value;
 }
 
-// float current_pe_ratio = 4;
+// float current_pe_ratio = 5;
 inline void Stock::clear_current_pe_ratio() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.current_pe_ratio_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000008u;
+  _impl_._has_bits_[0] &= ~0x00000010u;
 }
 inline float Stock::current_pe_ratio() const {
   // @@protoc_insertion_point(field_get:Stock.current_pe_ratio)
@@ -1056,7 +1778,7 @@ inline float Stock::current_pe_ratio() const {
 }
 inline void Stock::set_current_pe_ratio(float value) {
   _internal_set_current_pe_ratio(value);
-  _impl_._has_bits_[0] |= 0x00000008u;
+  _impl_._has_bits_[0] |= 0x00000010u;
   // @@protoc_insertion_point(field_set:Stock.current_pe_ratio)
 }
 inline float Stock::_internal_current_pe_ratio() const {
@@ -1074,6 +1796,19 @@ inline void Stock::_internal_set_current_pe_ratio(float value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
+
+namespace google {
+namespace protobuf {
+
+template <>
+struct is_proto_enum<::Currency> : std::true_type {};
+template <>
+inline const EnumDescriptor* PROTOBUF_NONNULL GetEnumDescriptor<::Currency>() {
+  return ::Currency_descriptor();
+}
+
+}  // namespace protobuf
+}  // namespace google
 
 // @@protoc_insertion_point(global_scope)
 

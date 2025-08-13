@@ -18,4 +18,10 @@ grpc::Status StockMarketServiceImpl::GetStock(grpc::ServerContext* context, cons
     return grpc::Status::OK;
 }
 
+grpc::Status StockMarketServiceImpl::ListStocks(grpc::ServerContext *context, const ListStockRequest *request, ListStockResponse *response) {
+    spdlog::info("Received ListStocks request with limit={}", request->page_size());
+    return grpc::Status::OK;
+}
+
+
 } // service

@@ -1,6 +1,6 @@
 # ---- Fetch gRPC and deps----
 set(ABSL_PROPAGATE_CXX_STD ON CACHE BOOL "" FORCE) # Don't let abseil set the C++ version
-set(ABSL_ENABLE_INSTALL ON CACHE BOOL "" FORCE)    # Install abseil globally
+set(ABSL_ENABLE_INSTALL ON CACHE BOOL "" FORCE)    # Install abseil
 FetchContent_Declare(
         abseil
         GIT_REPOSITORY https://github.com/abseil/abseil-cpp.git

@@ -11,6 +11,7 @@ namespace service {
 class StockMarketServiceImpl final : public StockMarket::Service {
 public:
     grpc::Status GetStock(grpc::ServerContext *context, const GetStockRequest *request, GetStockResponse *response) override;
+    grpc::Status ListStocks(grpc::ServerContext *context, const ListStockRequest *request, ListStockResponse *response) override;
 };
 
 } // service

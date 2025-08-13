@@ -23,6 +23,7 @@
 
 static const char* StockMarket_method_names[] = {
   "/StockMarket/GetStock",
+  "/StockMarket/ListStocks",
 };
 
 std::unique_ptr< StockMarket::Stub> StockMarket::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -33,6 +34,7 @@ std::unique_ptr< StockMarket::Stub> StockMarket::NewStub(const std::shared_ptr< 
 
 StockMarket::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
   : channel_(channel), rpcmethod_GetStock_(StockMarket_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListStocks_(StockMarket_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status StockMarket::Stub::GetStock(::grpc::ClientContext* context, const ::GetStockRequest& request, ::GetStockResponse* response) {
@@ -58,6 +60,29 @@ void StockMarket::Stub::async::GetStock(::grpc::ClientContext* context, const ::
   return result;
 }
 
+::grpc::Status StockMarket::Stub::ListStocks(::grpc::ClientContext* context, const ::ListStockRequest& request, ::ListStockResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::ListStockRequest, ::ListStockResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_ListStocks_, context, request, response);
+}
+
+void StockMarket::Stub::async::ListStocks(::grpc::ClientContext* context, const ::ListStockRequest* request, ::ListStockResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::ListStockRequest, ::ListStockResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_ListStocks_, context, request, response, std::move(f));
+}
+
+void StockMarket::Stub::async::ListStocks(::grpc::ClientContext* context, const ::ListStockRequest* request, ::ListStockResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_ListStocks_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::ListStockResponse>* StockMarket::Stub::PrepareAsyncListStocksRaw(::grpc::ClientContext* context, const ::ListStockRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::ListStockResponse, ::ListStockRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_ListStocks_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::ListStockResponse>* StockMarket::Stub::AsyncListStocksRaw(::grpc::ClientContext* context, const ::ListStockRequest& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncListStocksRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 StockMarket::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       StockMarket_method_names[0],
@@ -69,12 +94,29 @@ StockMarket::Service::Service() {
              ::GetStockResponse* resp) {
                return service->GetStock(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      StockMarket_method_names[1],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< StockMarket::Service, ::ListStockRequest, ::ListStockResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](StockMarket::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::ListStockRequest* req,
+             ::ListStockResponse* resp) {
+               return service->ListStocks(ctx, req, resp);
+             }, this)));
 }
 
 StockMarket::Service::~Service() {
 }
 
 ::grpc::Status StockMarket::Service::GetStock(::grpc::ServerContext* context, const ::GetStockRequest* request, ::GetStockResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status StockMarket::Service::ListStocks(::grpc::ServerContext* context, const ::ListStockRequest* request, ::ListStockResponse* response) {
   (void) context;
   (void) request;
   (void) response;
