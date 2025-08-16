@@ -10,7 +10,7 @@ namespace db {
 
 class PostgresClient {
 public:
-    PostgresClient(const std::string& host, const int& port, const std::string& dbname, const std::string& user, std::string& password);
+    PostgresClient(const std::string& host, const int& port, const std::string& dbname, const std::string& user, const std::string& password);
 private:
     pqxx::connection connection_;
 };
