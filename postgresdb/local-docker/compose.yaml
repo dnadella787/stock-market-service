@@ -1,0 +1,10 @@
+services:
+  db:
+    image: "postgres"
+    container_name: "stock-db"
+    environment:
+      POSTGRES_PASSWORD: localdbpwd
+      POSTGRES_DB: stock-db
+      POSTGRES_USER: localdbusr
+    ports:
+      - "5432:5432"
