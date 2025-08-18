@@ -22,6 +22,8 @@
 #include <grpcpp/ports_def.inc>
 
 static const char* StockMarket_method_names[] = {
+  "/StockMarket/GetExchange",
+  "/StockMarket/ListExchanges",
   "/StockMarket/GetStock",
   "/StockMarket/ListStocks",
 };
@@ -33,9 +35,57 @@ std::unique_ptr< StockMarket::Stub> StockMarket::NewStub(const std::shared_ptr< 
 }
 
 StockMarket::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
-  : channel_(channel), rpcmethod_GetStock_(StockMarket_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListStocks_(StockMarket_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  : channel_(channel), rpcmethod_GetExchange_(StockMarket_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListExchanges_(StockMarket_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetStock_(StockMarket_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListStocks_(StockMarket_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
+
+::grpc::Status StockMarket::Stub::GetExchange(::grpc::ClientContext* context, const ::GetExchangeRequest& request, ::GetExchangeResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::GetExchangeRequest, ::GetExchangeResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetExchange_, context, request, response);
+}
+
+void StockMarket::Stub::async::GetExchange(::grpc::ClientContext* context, const ::GetExchangeRequest* request, ::GetExchangeResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::GetExchangeRequest, ::GetExchangeResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetExchange_, context, request, response, std::move(f));
+}
+
+void StockMarket::Stub::async::GetExchange(::grpc::ClientContext* context, const ::GetExchangeRequest* request, ::GetExchangeResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetExchange_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::GetExchangeResponse>* StockMarket::Stub::PrepareAsyncGetExchangeRaw(::grpc::ClientContext* context, const ::GetExchangeRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::GetExchangeResponse, ::GetExchangeRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetExchange_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::GetExchangeResponse>* StockMarket::Stub::AsyncGetExchangeRaw(::grpc::ClientContext* context, const ::GetExchangeRequest& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncGetExchangeRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+::grpc::Status StockMarket::Stub::ListExchanges(::grpc::ClientContext* context, const ::ListExchangesRequest& request, ::ListExchangesResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::ListExchangesRequest, ::ListExchangesResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_ListExchanges_, context, request, response);
+}
+
+void StockMarket::Stub::async::ListExchanges(::grpc::ClientContext* context, const ::ListExchangesRequest* request, ::ListExchangesResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::ListExchangesRequest, ::ListExchangesResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_ListExchanges_, context, request, response, std::move(f));
+}
+
+void StockMarket::Stub::async::ListExchanges(::grpc::ClientContext* context, const ::ListExchangesRequest* request, ::ListExchangesResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_ListExchanges_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::ListExchangesResponse>* StockMarket::Stub::PrepareAsyncListExchangesRaw(::grpc::ClientContext* context, const ::ListExchangesRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::ListExchangesResponse, ::ListExchangesRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_ListExchanges_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::ListExchangesResponse>* StockMarket::Stub::AsyncListExchangesRaw(::grpc::ClientContext* context, const ::ListExchangesRequest& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncListExchangesRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
 
 ::grpc::Status StockMarket::Stub::GetStock(::grpc::ClientContext* context, const ::GetStockRequest& request, ::GetStockResponse* response) {
   return ::grpc::internal::BlockingUnaryCall< ::GetStockRequest, ::GetStockResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetStock_, context, request, response);
@@ -87,6 +137,26 @@ StockMarket::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       StockMarket_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< StockMarket::Service, ::GetExchangeRequest, ::GetExchangeResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](StockMarket::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::GetExchangeRequest* req,
+             ::GetExchangeResponse* resp) {
+               return service->GetExchange(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      StockMarket_method_names[1],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< StockMarket::Service, ::ListExchangesRequest, ::ListExchangesResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](StockMarket::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::ListExchangesRequest* req,
+             ::ListExchangesResponse* resp) {
+               return service->ListExchanges(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      StockMarket_method_names[2],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< StockMarket::Service, ::GetStockRequest, ::GetStockResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](StockMarket::Service* service,
              ::grpc::ServerContext* ctx,
@@ -95,7 +165,7 @@ StockMarket::Service::Service() {
                return service->GetStock(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      StockMarket_method_names[1],
+      StockMarket_method_names[3],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< StockMarket::Service, ::ListStockRequest, ::ListStockResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](StockMarket::Service* service,
@@ -107,6 +177,20 @@ StockMarket::Service::Service() {
 }
 
 StockMarket::Service::~Service() {
+}
+
+::grpc::Status StockMarket::Service::GetExchange(::grpc::ServerContext* context, const ::GetExchangeRequest* request, ::GetExchangeResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status StockMarket::Service::ListExchanges(::grpc::ServerContext* context, const ::ListExchangesRequest* request, ::ListExchangesResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
 ::grpc::Status StockMarket::Service::GetStock(::grpc::ServerContext* context, const ::GetStockRequest* request, ::GetStockResponse* response) {

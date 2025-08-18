@@ -28,8 +28,10 @@ FetchContent_MakeAvailable(spdlog CLI11 libpqxx)
 add_subdirectory(api)
 
 add_executable(listener src/main.cpp
-        src/service/stock_market.cpp
-        src/service/stock_market.h
+        src/apiservice/stock_market.cpp
+        src/apiservice/stock_market.h
         src/db/postgres_client.cpp
-        src/db/postgres_client.h)
+        src/db/postgres_client.h
+        src/server/api_server.cpp
+        src/server/api_server.h)
 target_link_libraries(listener PRIVATE spdlog CLI11 libpqxx::pqxx proto_lib)

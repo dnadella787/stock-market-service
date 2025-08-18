@@ -34,6 +34,7 @@ CREATE TABLE security_prices (
     security_price_id BIGSERIAL PRIMARY KEY,
     security_id INTEGER REFERENCES securities (security_id) NOT NULL,
     price DECIMAL(12, 2) NOT NULL,
+    currency CHAR(3) NOT NULL,
     timestamp TIMESTAMPTZ NOT NULL,
     -- Ensure a price is unique to a specific security and timestamp
     CONSTRAINT unique_security_ts

@@ -5,21 +5,9 @@
 #include "grpcpp/server_builder.h"
 #include "grpcpp/security/server_credentials.h"
 #include "spdlog/spdlog.h"
-#include "service/stock_market.h"
+#include "apiservice/stock_market.h"
 
 
-void start_server(const std::string& server_address, const std::string& db_host, const int& db_port, const std::string& db_name, const std::string& db_user, std::string& db_pwd) {
-    db::PostgresClient postgres_client(db_host, db_port, db_name, db_user, db_pwd);
-    service::StockMarketServiceImpl stock_market_service;
-
-    grpc::ServerBuilder builder;
-    builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
-    builder.RegisterService(&stock_market_service);
-
-    std::unique_ptr<grpc::Server> server(builder.BuildAndStart());
-    spdlog::info("Starting server on {}", server_address);
-    server->Wait();
-}
 
 int main(const int argc, char* argv[]) {
     // Flag assignment variables
