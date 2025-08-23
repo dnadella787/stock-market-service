@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package service;
+
+// *****************************
+// * Exchange APIs and objects *
+// *****************************
+service ExchangeService {
+    rpc GetExchange (GetExchangeRequest) returns (GetExchangeResponse);
+    rpc ListExchanges (ListExchangesRequest) returns (ListExchangesResponse);
+}
+
+message GetExchangeRequest {
+    string code = 1;
+}
+
+message GetExchangeResponse {
+    Exchange exchange = 1;
+}
+
+message ListExchangesRequest {
+    string country = 1;
+    int32 page_size = 2;
+    string page_token = 3;
+}
+
+message ListExchangesResponse {
+    repeated Exchange exchange = 1;
+    string next_page_token = 2;
+}
+
+message Exchange {
+    string code = 1;
+    string full_name = 2;
+    float value = 3;
+    float current_pe_ratio = 4;
+    string city = 5;
+    string country = 6;
+}

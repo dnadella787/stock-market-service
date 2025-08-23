@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+import "common/types.proto";
+
+package service;
+
+// *******************************
+// * Securities APIs and objects *
+// *******************************
+service SecurityService {
+    rpc GetSecurity (GetSecurityRequest) returns (GetSecurityResponse);
+    rpc ListSecurities (ListSecuritiesRequest) returns (ListSecuritiesResponse);
+}
+
+message GetSecurityRequest {
+    string symbol = 1;
+}
+
+message GetSecurityResponse {
+    Security security = 1;
+}
+
+message ListSecuritiesRequest {
+    int32 page_size = 1;
+    string page_token = 2;
+}
+
+message ListSecuritiesResponse {
+    repeated Security securities = 1;
+    string next_page_token = 2;
+}
+
+message Security {
+    string symbol = 1;
+    string full_name = 2;
+    common.Money current_price = 3;
+    float current_pe_ratio = 4;
+}
+

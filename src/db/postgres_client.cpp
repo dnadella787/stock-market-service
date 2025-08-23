@@ -24,8 +24,25 @@ PostgresClient::PostgresClient(
     spdlog::info("Postgres DB client successfully initialized");
 }
 
-std::unique_ptr<PostgresClient> get_postgres_client(const std::string& host, const int& port, const std::string& dbname, const std::string& user, const std::string& password) {
-    return std::make_unique<PostgresClient>(host, port, dbname, user, password);
+std::shared_ptr<PostgresClient> get_postgres_client(
+            const std::string& host,
+            const int& port,
+            const std::string& dbname,
+            const std::string& user,
+            const std::string& password) {
+    return std::make_shared<PostgresClient>(host, port, dbname, user, password);
 }
+
+// pqxx::result PostgresClient::exec_read(const constexpr std::string_view& query_name, const pqxx::params &params) {
+//     pqxx::read_transaction txn{connection_};
+//     return txn.exec(query_name, params);
+// }
+//
+// pqxx::result PostgresClient::exec_commit(const std::string& query) {
+//     pqxx::work txn{connection_};
+//     const pqxx::result res = txn.exec(query);
+//     txn.commit();
+//     return res;
+// }
 
 }

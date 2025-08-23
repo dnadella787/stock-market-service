@@ -1,12 +1,8 @@
-#include "stockmarket.grpc.pb.h"
 #include <CLI/CLI.hpp>
-
 #include "db/postgres_client.h"
 #include "grpcpp/server_builder.h"
 #include "grpcpp/security/server_credentials.h"
 #include "spdlog/spdlog.h"
-#include "apiservice/stock_market.h"
-
 
 
 int main(const int argc, char* argv[]) {
@@ -36,7 +32,8 @@ int main(const int argc, char* argv[]) {
     // set logging level by flag
     spdlog::set_level(debug_log ? spdlog::level::debug : spdlog::level::info);
 
-    // start server
-    start_server(server_address, db_host, db_port, db_name, db_user, db_pwd);
+    // create and start server
+    server::ApiServer server(server_address, db_host, db_port, db_name, db_user, db_pwd);
+
     return 0;
 }

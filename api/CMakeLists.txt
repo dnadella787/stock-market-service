@@ -13,12 +13,11 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(abseil gRPC)
 
-# Generate the gRPC and protobuf source files
-file(GLOB cpp_srcs "${CMAKE_CURRENT_SOURCE_DIR}/*.pb.cc")
-file(GLOB hdr_srcs "${CMAKE_CURRENT_SOURCE_DIR}/*.pb.h")
+# Grab list of gRPC and protobuf files
+file(GLOB_RECURSE srcs "*.pb.cc" "*.pb.h")
 
 # Build lib from generated Protobuf + gRPC source files
-add_library(proto_lib ${cpp_srcs} ${hdr_srcs})
+add_library(proto_lib ${srcs})
 
 # Make headers in this lib visible to others that link against it
 target_include_directories(proto_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

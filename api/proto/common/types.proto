@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package common;
+
+message Money {
+    string currency_code = 1;
+    float price = 2;
+}

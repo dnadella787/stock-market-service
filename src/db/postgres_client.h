@@ -11,19 +11,18 @@
 namespace db {
 
 class PostgresClient {
-private:
+public:
     // Private constructor
     PostgresClient(const std::string& host, const int& port, const std::string& dbname, const std::string& user, const std::string& password);
-
-    // Prototype factory method that has access to PostgresClient private constructor
-    // Returns a unique client each time, not a singleton instance of the PG client
-    friend std::unique_ptr<PostgresClient> get_postgres_client(const std::string& host, const int& port, const std::string& dbname, const std::string& user, const std::string& password);
-
+private:
     // Private variables
     pqxx::connection connection_;
+public:
+    // pqxx::result exec_read(const constexpr std::string_view& query_name, const pqxx::params &params);
+    // pqxx::result exec_commit(const std::string& query);
 };
 
-std::unique_ptr<PostgresClient> get_postgres_client(const std::string& host, const int& port, const std::string& dbname, const std::string& user, const std::string& password);
+std::shared_ptr<PostgresClient> get_postgres_client(const std::string& host, const int& port, const std::string& dbname, const std::string& user, const std::string& password);
 }
 
 #endif //POSTGRES_CLIENT_H
