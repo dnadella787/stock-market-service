@@ -16,6 +16,7 @@ ExchangeServiceImpl::ExchangeServiceImpl(std::shared_ptr<dal::ExchangeDao> excha
 }
 
 grpc::Status ExchangeServiceImpl::GetExchange(grpc::ServerContext *context, const GetExchangeRequest *request, GetExchangeResponse *response) {
+    spdlog::info("Received GetExchange request for exchange_code={}", request->code());
     try {
         std::unique_ptr<model::Exchange> db_exchange = exchange_dao_->GetExchange(request->code());
 
@@ -25,6 +26,7 @@ grpc::Status ExchangeServiceImpl::GetExchange(grpc::ServerContext *context, cons
         exchange->set_city(db_exchange->city);
         exchange->set_country(db_exchange->country);
 
+        spdlog::info("Returning successful GetExchange response for exchange_code={}", request->code());
         return grpc::Status::OK;
     } catch (const dal::EntityNotFoundException &e) {
         spdlog::error("Exchange with code={} could not be found in DB", request->code());
