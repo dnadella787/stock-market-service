@@ -7,10 +7,10 @@
 
 using namespace service;
 
-namespace apiservice {
+namespace api_service {
 
-SecurityServiceImpl::SecurityServiceImpl(std::shared_ptr<db::PostgresClient> db_client) {
-    db_client_ = db_client;
+SecurityServiceImpl::SecurityServiceImpl(std::shared_ptr<dal::SecurityDao> security_dao) {
+    security_dao_ = security_dao;
 }
 
 grpc::Status SecurityServiceImpl::GetSecurity(grpc::ServerContext* context, const GetSecurityRequest* request, GetSecurityResponse* response) {

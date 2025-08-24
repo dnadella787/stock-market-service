@@ -28,14 +28,17 @@ FetchContent_MakeAvailable(spdlog CLI11 libpqxx)
 add_subdirectory(api)
 
 add_executable(listener src/main.cpp
-        src/db/postgres_client.cpp
-        src/db/postgres_client.h
         src/server/api_server.cpp
         src/server/api_server.h
-        src/dal/exchange.cpp
-        src/dal/exchange.h
-        src/apiservice/security_service.cpp
-        src/apiservice/security_service.h
-        src/apiservice/exchange_service.cpp
-        src/apiservice/exchange_service.h)
+        src/api_service/security_service.cpp
+        src/api_service/security_service.h
+        src/api_service/exchange_service.cpp
+        src/api_service/exchange_service.h
+        src/dal/exchange_dao.cpp
+        src/dal/exchange_dao.h
+        src/dal/security_dao.cpp
+        src/dal/security_dao.h
+        src/dal/models/exchange.h
+        src/dal/models/security.h
+        src/dal/exceptions/entity_not_found_exception.h)
 target_link_libraries(listener PRIVATE spdlog CLI11 libpqxx::pqxx proto_lib)

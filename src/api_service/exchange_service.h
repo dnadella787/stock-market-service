@@ -4,23 +4,22 @@
 
 #ifndef EXCHANGE_SERVICE_H
 #define EXCHANGE_SERVICE_H
+#include "../dal/exchange_dao.h"
 #include "service/exchange.grpc.pb.h"
-#include "../db/postgres_client.h"
 
 using namespace service;
 
-namespace apiservice {
+namespace api_service {
 
 class ExchangeServiceImpl final : public ExchangeService::Service {
-
 public:
-    ExchangeServiceImpl(std::shared_ptr<db::PostgresClient> db_client);
+    ExchangeServiceImpl(std::shared_ptr<dal::ExchangeDao> exchange_dao);
 
     // API implementations
     grpc::Status GetExchange(grpc::ServerContext *context, const GetExchangeRequest *request, GetExchangeResponse *response) override;
     grpc::Status ListExchanges(grpc::ServerContext *context, const ListExchangesRequest *request, ListExchangesResponse *response) override;
 private:
-    std::shared_ptr<db::PostgresClient> db_client_;
+    std::shared_ptr<dal::ExchangeDao> exchange_dao_;
 };
 
 } // apiservice

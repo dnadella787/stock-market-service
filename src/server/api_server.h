@@ -7,7 +7,6 @@
 #include <string>
 
 #include "grpcpp/server.h"
-#include "../db/postgres_client.h"
 
 namespace server {
 
