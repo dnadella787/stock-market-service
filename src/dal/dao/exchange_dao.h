@@ -6,7 +6,7 @@
 #define EXCHANGE_DAO_H
 #include <memory>
 
-#include "models/exchange.h"
+#include "../models/exchange.h"
 #include <pqxx/connection>
 
 namespace dal {

@@ -3,15 +3,11 @@
 //
 
 #include "server.h"
-
-#include "../services/exchange_service.h"
-#include "../services/security_service.h"
 #include "grpcpp/server_builder.h"
 #include "grpcpp/security/server_credentials.h"
-#include <pqxx/connection>
-
-#include "security_dao.h"
 #include "spdlog/spdlog.h"
+#include "../services/exchange_service.h"
+#include "../services/security_service.h"
 
 namespace api {
 namespace server {
