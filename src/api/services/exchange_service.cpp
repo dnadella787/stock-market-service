@@ -4,12 +4,13 @@
 
 #include "exchange_service.h"
 
-#include "../dal/exceptions/entity_not_found_exception.h"
+#include "exceptions/entity_not_found_exception.h"
 #include "spdlog/spdlog.h"
 
 using namespace service;
 
-namespace api_service {
+namespace api {
+namespace service {
 
 ExchangeServiceImpl::ExchangeServiceImpl(std::shared_ptr<dal::ExchangeDao> exchange_dao) {
     exchange_dao_ = exchange_dao;
@@ -38,5 +39,5 @@ grpc::Status ExchangeServiceImpl::ListExchanges(grpc::ServerContext *context, co
     return grpc::Status::OK;
 }
 
-
 } // apiservice
+}

@@ -10,7 +10,7 @@ namespace dal {
 
 class SecurityDao {
 public:
-    SecurityDao(std::shared_ptr<pqxx::connection> pg_conn);
+    explicit SecurityDao(std::shared_ptr<pqxx::connection> pg_conn);
     // model::Security GetSecurity(std::string& symbol);
 private:
     std::shared_ptr<pqxx::connection> pg_conn_;

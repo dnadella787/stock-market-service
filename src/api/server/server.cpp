@@ -2,19 +2,21 @@
 // Created by Dhanush Nadella on 8/17/25.
 //
 
-#include "api_server.h"
-#include "../api_service/exchange_service.h"
-#include "../api_service/security_service.h"
-#include "../dal/exchange_dao.h"
-#include "../dal/security_dao.h"
+#include "server.h"
+
+#include "../services/exchange_service.h"
+#include "../services/security_service.h"
 #include "grpcpp/server_builder.h"
 #include "grpcpp/security/server_credentials.h"
 #include <pqxx/connection>
+
+#include "security_dao.h"
 #include "spdlog/spdlog.h"
 
+namespace api {
 namespace server {
 
-ApiServer::ApiServer(
+Server::Server(
             const std::string &server_address,
             const std::string &db_host,
             const int &db_port,
@@ -25,8 +27,8 @@ ApiServer::ApiServer(
     const std::shared_ptr<dal::ExchangeDao> exchange_dao = std::make_shared<dal::ExchangeDao>(pg_conn);
     const std::shared_ptr<dal::SecurityDao> security_dao = std::make_shared<dal::SecurityDao>(pg_conn);
 
-    api_service::SecurityServiceImpl security_service(security_dao);
-    api_service::ExchangeServiceImpl exchange_service(exchange_dao);
+    service::SecurityServiceImpl security_service(security_dao);
+    service::ExchangeServiceImpl exchange_service(exchange_dao);
 
     grpc::ServerBuilder builder;
     builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
@@ -38,9 +40,10 @@ ApiServer::ApiServer(
     server_->Wait();
 }
 
-void ApiServer::Shutdown() const {
+void Server::Shutdown() const {
     server_->Shutdown();
     spdlog::info("Successfully shutdown server");
 }
 
-} // server namespace
+}
+} // api_server namespace

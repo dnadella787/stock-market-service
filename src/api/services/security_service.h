@@ -6,11 +6,12 @@
 #define SECURITY_SERVICE_H
 #include <service/security.grpc.pb.h>
 
-#include "../dal/security_dao.h"
+#include "security_dao.h"
 
 using namespace service;
 
-namespace api_service {
+namespace api {
+namespace service {
 
 class SecurityServiceImpl final : public SecurityService::Service {
 public:
@@ -23,6 +24,7 @@ private:
     std::shared_ptr<dal::SecurityDao> security_dao_;
 };
 
-} // apiservice
+}
+} // api_server
 
 #endif //SECURITY_SERVICE_H

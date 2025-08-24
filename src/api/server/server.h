@@ -8,17 +8,19 @@
 
 #include "grpcpp/server.h"
 
+namespace api {
 namespace server {
 
-class ApiServer {
+class Server {
 public:
-    ApiServer(const std::string& server_address, const std::string& db_host, const int& db_port, const std::string& db_name, const std::string& db_user, const std::string& db_pwd);
+    Server(const std::string& server_address, const std::string& db_host, const int& db_port, const std::string& db_name, const std::string& db_user, const std::string& db_pwd);
     void Shutdown() const;
 private:
     std::unique_ptr<grpc::Server> server_;
 };
 
-} // server namespace
+} // server ns
+} // api ns
 
 
 

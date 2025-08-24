@@ -7,7 +7,8 @@
 
 using namespace service;
 
-namespace api_service {
+namespace api {
+namespace service {
 
 SecurityServiceImpl::SecurityServiceImpl(std::shared_ptr<dal::SecurityDao> security_dao) {
     security_dao_ = security_dao;
@@ -31,5 +32,7 @@ grpc::Status SecurityServiceImpl::GetSecurity(grpc::ServerContext* context, cons
 grpc::Status SecurityServiceImpl::ListSecurities(grpc::ServerContext *context, const ListSecuritiesRequest *request, ListSecuritiesResponse *response) {
     spdlog::info("Received ListStocks request with limit={}", request->page_size());
     return grpc::Status::OK;
+}
+
 }
 }

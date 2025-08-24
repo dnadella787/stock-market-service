@@ -17,28 +17,8 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
         GIT_TAG v2.5.0
 )
-# ---- Fetch libpqxx (postgres C++ lib) ----
-FetchContent_Declare(
-        libpqxx
-        GIT_REPOSITORY https://github.com/jtv/libpqxx.git
-        GIT_TAG 7.10.1
-)
-FetchContent_MakeAvailable(spdlog CLI11 libpqxx)
+FetchContent_MakeAvailable(spdlog CLI11)
 
-add_subdirectory(api)
-
-add_executable(smsrv src/main.cpp
-        src/server/api_server.cpp
-        src/server/api_server.h
-        src/api_service/security_service.cpp
-        src/api_service/security_service.h
-        src/api_service/exchange_service.cpp
-        src/api_service/exchange_service.h
-        src/dal/exchange_dao.cpp
-        src/dal/exchange_dao.h
-        src/dal/security_dao.cpp
-        src/dal/security_dao.h
-        src/dal/models/exchange.h
-        src/dal/models/security.h
-        src/dal/exceptions/entity_not_found_exception.h)
-target_link_libraries(smsrv PRIVATE spdlog CLI11 libpqxx::pqxx proto_lib)
+add_subdirectory(grpc-contract)
+add_subdirectory(src/dal)
+add_subdirectory(src/api)

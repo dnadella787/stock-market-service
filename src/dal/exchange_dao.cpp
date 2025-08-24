@@ -8,10 +8,13 @@
 #include <pqxx/transaction>
 
 #include "exceptions/entity_not_found_exception.h"
-#include "spdlog/spdlog.h"
 
 namespace dal {
 
+    /**
+ *
+ * @param pg_conn
+ */
 ExchangeDao::ExchangeDao(std::shared_ptr<pqxx::connection> pg_conn) : pg_conn_(pg_conn) {
     pg_conn_->prepare("get_exchange", "SELECT * FROM exchanges WHERE exchange_code = $1;");
 }

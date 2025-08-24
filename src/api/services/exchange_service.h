@@ -4,12 +4,13 @@
 
 #ifndef EXCHANGE_SERVICE_H
 #define EXCHANGE_SERVICE_H
-#include "../dal/exchange_dao.h"
+#include "exchange_dao.h"
 #include "service/exchange.grpc.pb.h"
 
 using namespace service;
 
-namespace api_service {
+namespace api {
+namespace service {
 
 class ExchangeServiceImpl final : public ExchangeService::Service {
 public:
@@ -22,6 +23,7 @@ private:
     std::shared_ptr<dal::ExchangeDao> exchange_dao_;
 };
 
-} // apiservice
+} // service
+} // api_server
 
 #endif //EXCHANGE_SERVICE_H

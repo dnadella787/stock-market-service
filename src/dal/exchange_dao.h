@@ -13,7 +13,7 @@ namespace dal {
 
 class ExchangeDao {
 public:
-    ExchangeDao(std::shared_ptr<pqxx::connection> pg_conn);
+    explicit ExchangeDao(std::shared_ptr<pqxx::connection> pg_conn);
     std::unique_ptr<model::Exchange> GetExchange(const std::string& exchange_code);
     static constexpr std::string_view ExchangeEntityType = "Exchange";
 private:
@@ -22,4 +22,4 @@ private:
 
 } // dal ns
 
-#endif // EXCHANGE_DAL_H
+#endif // EXCHANGE_DAO_H

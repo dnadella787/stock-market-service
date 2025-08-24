@@ -1,7 +1,10 @@
+//
+// Created by Dhanush Nadella on 8/24/25.
+//
+
 #include <CLI/CLI.hpp>
-#include "grpcpp/server_builder.h"
 #include "grpcpp/security/server_credentials.h"
-#include "server/api_server.h"
+#include "server/server.h"
 #include "spdlog/spdlog.h"
 
 
@@ -33,7 +36,7 @@ int main(const int argc, char* argv[]) {
     spdlog::set_level(debug_log ? spdlog::level::debug : spdlog::level::info);
 
     // create and start server
-    server::ApiServer server(server_address, db_host, db_port, db_name, db_user, db_pwd);
+    api::server::Server server(server_address, db_host, db_port, db_name, db_user, db_pwd);
 
     return 0;
 }
