@@ -10,7 +10,7 @@ find ./api/proto/ -name "*.proto" -exec ~/Downloads/protoc-31.1-osx-aarch_64/bin
 
 to start server:
 ```bash
-./cmake-build-debug/listener --db-host localhost --db-port 5432 --db-name stock-db --db-user localdbusr --db-pwd localdbpwd
+./cmake-build-debug/smsrv --db-host localhost --db-port 5432 --db-name stock-db --db-user localdbusr --db-pwd localdbpwd
 ```
 
 to start local db:

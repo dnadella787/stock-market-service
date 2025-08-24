@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.31)
-project(listener)
+project(stock-market-service)
 set(CMAKE_CXX_STANDARD 20)
 set(FETCHCONTENT_QUIET OFF)
 
@@ -27,7 +27,7 @@ FetchContent_MakeAvailable(spdlog CLI11 libpqxx)
 
 add_subdirectory(api)
 
-add_executable(listener src/main.cpp
+add_executable(smsrv src/main.cpp
         src/server/api_server.cpp
         src/server/api_server.h
         src/api_service/security_service.cpp
@@ -41,4 +41,4 @@ add_executable(listener src/main.cpp
         src/dal/models/exchange.h
         src/dal/models/security.h
         src/dal/exceptions/entity_not_found_exception.h)
-target_link_libraries(listener PRIVATE spdlog CLI11 libpqxx::pqxx proto_lib)
+target_link_libraries(smsrv PRIVATE spdlog CLI11 libpqxx::pqxx proto_lib)
