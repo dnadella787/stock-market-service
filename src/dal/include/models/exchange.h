@@ -4,13 +4,14 @@
 
 #ifndef EXCHANGE_H
 #define EXCHANGE_H
+
 #include <string>
 
-namespace model {
+namespace dal::model {
 
 class Exchange {
 public:
-    Exchange(std::string code, std::string name, std::string city, std::string country) : code(code), name(name), city(city), country(country) {};
+    Exchange(const std::string& code, const std::string& name, const std::string& city, const std::string& country);
     std::string code;
     std::string name;
     std::string city;
@@ -18,7 +19,5 @@ public:
 };
 
 }
-
-
 
 #endif //EXCHANGE_H

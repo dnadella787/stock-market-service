@@ -9,8 +9,7 @@
 #include "../services/exchange_service.h"
 #include "../services/security_service.h"
 
-namespace api {
-namespace server {
+namespace api::server {
 
 Server::Server(
             const std::string &server_address,
@@ -20,8 +19,8 @@ Server::Server(
             const std::string &db_user,
             const std::string &db_pwd) {
     const std::shared_ptr<pqxx::connection> pg_conn = std::make_shared<pqxx::connection>(std::format("host={} port={} dbname={} user={} password={}", db_host, db_port, db_name, db_user, db_pwd));
-    const std::shared_ptr<dal::ExchangeDao> exchange_dao = std::make_shared<dal::ExchangeDao>(pg_conn);
-    const std::shared_ptr<dal::SecurityDao> security_dao = std::make_shared<dal::SecurityDao>(pg_conn);
+    const std::shared_ptr<dal::dao::ExchangeDao> exchange_dao = std::make_shared<dal::dao::ExchangeDao>(pg_conn);
+    const std::shared_ptr<dal::dao::SecurityDao> security_dao = std::make_shared<dal::dao::SecurityDao>(pg_conn);
 
     service::SecurityServiceImpl security_service(security_dao);
     service::ExchangeServiceImpl exchange_service(exchange_dao);
@@ -42,4 +41,3 @@ void Server::Shutdown() const {
 }
 
 }
-} // api_server namespace

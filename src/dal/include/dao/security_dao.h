@@ -6,7 +6,7 @@
 #define SECURITY_DAO_H
 #include <pqxx/connection>
 
-namespace dal {
+namespace dal::dao {
 
 class SecurityDao {
 public:
@@ -17,6 +17,5 @@ private:
 };
 
 }
-
 
 #endif //SECURITY_DAO_H

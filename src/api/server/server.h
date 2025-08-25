@@ -8,8 +8,7 @@
 
 #include "grpcpp/server.h"
 
-namespace api {
-namespace server {
+namespace api::server {
 
 class Server {
 public:
@@ -19,8 +18,7 @@ private:
     std::unique_ptr<grpc::Server> server_;
 };
 
-} // server ns
-} // api ns
+}
 
 
 

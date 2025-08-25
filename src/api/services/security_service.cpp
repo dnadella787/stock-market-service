@@ -7,10 +7,9 @@
 
 using namespace service;
 
-namespace api {
-namespace service {
+namespace api::service {
 
-SecurityServiceImpl::SecurityServiceImpl(std::shared_ptr<dal::SecurityDao> security_dao) {
+SecurityServiceImpl::SecurityServiceImpl(std::shared_ptr<dal::dao::SecurityDao> security_dao) {
     security_dao_ = security_dao;
 }
 
@@ -34,5 +33,4 @@ grpc::Status SecurityServiceImpl::ListSecurities(grpc::ServerContext *context, c
     return grpc::Status::OK;
 }
 
-}
 }
