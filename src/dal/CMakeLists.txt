@@ -7,11 +7,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(libpqxx)
 
 # Build lib from all dal cpp + header files
-file(GLOB_RECURSE srcs "*.cpp" "*.h")
-add_library(dal_lib ${srcs}
-        include/exceptions/entity_not_found_exception.h
-        models/exchange.cpp
-        models/security.cpp)
+file(GLOB_RECURSE srcs "*.cpp")
+add_library(dal_lib ${srcs})
 
 # Make headers in this lib visible to others that link against it
 target_include_directories(dal_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
