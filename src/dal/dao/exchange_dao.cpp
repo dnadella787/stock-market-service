@@ -10,22 +10,22 @@
 
 namespace dal::dao {
 
-ExchangeDao::ExchangeDao(std::shared_ptr<pqxx::connection> pg_conn) : pg_conn_(pg_conn) {
+ExchangeDao::ExchangeDao(const std::shared_ptr<pqxx::connection> &pg_conn) : pg_conn_(pg_conn) {
     pg_conn_->prepare("get_exchange", "SELECT * FROM exchanges WHERE exchange_code = $1;");
 }
 
 std::unique_ptr<model::Exchange> ExchangeDao::GetExchange(const std::string& exchange_code) const {
     pqxx::read_transaction txn{*pg_conn_};
-    pqxx::result res = txn.exec(pqxx::prepped("get_exchange"), pqxx::params(exchange_code));
-    if (res.empty()) {
+    try {
+        const pqxx::row res = txn.exec(pqxx::prepped("get_exchange"), pqxx::params(exchange_code)).one_row();
+        return std::make_unique<model::Exchange>(
+            res["exchange_code"].as<std::string>(),
+            res["exchange_name"].as<std::string>(),
+            res["city"].as<std::string>(),
+            res["country"].as<std::string>());
+    } catch (const pqxx::unexpected_rows &_) {
         throw exception::EntityNotFoundException(ExchangeEntityType, exchange_code);
     }
-    const pqxx::row row = res[0];
-    return std::make_unique<model::Exchange>(
-        row["exchange_code"].as<std::string>(),
-        row["exchange_name"].as<std::string>(),
-        row["city"].as<std::string>(),
-        row["country"].as<std::string>());
 }
 
 }

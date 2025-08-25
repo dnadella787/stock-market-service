@@ -6,6 +6,6 @@
 
 namespace dal::dao {
 
-SecurityDao::SecurityDao(std::shared_ptr<pqxx::connection> pg_conn) : pg_conn_(pg_conn) {}
+SecurityDao::SecurityDao(const std::shared_ptr<pqxx::connection> &pg_conn) : pg_conn_(pg_conn) {}
 
 }

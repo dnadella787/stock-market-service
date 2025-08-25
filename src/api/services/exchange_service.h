@@ -13,7 +13,7 @@ namespace api::service {
 
 class ExchangeServiceImpl final : public ExchangeService::Service {
 public:
-    ExchangeServiceImpl(std::shared_ptr<dal::dao::ExchangeDao> exchange_dao);
+    ExchangeServiceImpl(const std::shared_ptr<dal::dao::ExchangeDao> &exchange_dao);
 
     // API implementations
     grpc::Status GetExchange(grpc::ServerContext *context, const GetExchangeRequest *request, GetExchangeResponse *response) override;

@@ -9,7 +9,7 @@ using namespace service;
 
 namespace api::service {
 
-SecurityServiceImpl::SecurityServiceImpl(std::shared_ptr<dal::dao::SecurityDao> security_dao) {
+SecurityServiceImpl::SecurityServiceImpl(const std::shared_ptr<dal::dao::SecurityDao> &security_dao) {
     security_dao_ = security_dao;
 }
 

@@ -13,7 +13,7 @@ VALUES
 CREATE TABLE exchange_values (
     exchange_value_id SERIAL PRIMARY KEY,
     exchange_code VARCHAR(10) REFERENCES exchanges (exchange_code) NOT NULL,
-    value INTEGER NOT NULL,
+    value DECIMAL(12, 2) NOT NULL,
     timestamp TIMESTAMPTZ NOT NULL,
     -- Ensure a value is unique to a specific exchange and timestamp
     CONSTRAINT unique_exchange_ts

@@ -12,10 +12,17 @@ namespace dal::model {
 class Exchange {
 public:
     Exchange(const std::string& code, const std::string& name, const std::string& city, const std::string& country);
-    std::string code;
-    std::string name;
-    std::string city;
-    std::string country;
+
+    // Getters
+    [[nodiscard]] std::string code() const;
+    [[nodiscard]] std::string name() const;
+    [[nodiscard]] std::string city() const;
+    [[nodiscard]] std::string country() const;
+private:
+    std::string code_;
+    std::string name_;
+    std::string city_;
+    std::string country_;
 };
 
 }

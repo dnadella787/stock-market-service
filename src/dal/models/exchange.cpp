@@ -7,7 +7,23 @@
 namespace dal::model {
 
 Exchange::Exchange(const std::string& code, const std::string& name, const std::string& city, const std::string& country)
-    : code(code), name(name), city(city), country(country) {}
+    : code_(code), name_(name), city_(city), country_(country) {}
+
+[[nodiscard]] std::string Exchange::code() const {
+    return code_;
+}
+
+[[nodiscard]] std::string Exchange::name() const {
+    return name_;
+}
+
+[[nodiscard]] std::string Exchange::city() const {
+    return city_;
+}
+
+[[nodiscard]] std::string Exchange::country() const {
+    return country_;
+}
 
 }
 
