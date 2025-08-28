@@ -3,7 +3,8 @@
 //
 
 #include "security_service.h"
-#include "spdlog/spdlog.h"
+
+#include "absl/log/log.h"
 
 using namespace service;
 
@@ -14,7 +15,7 @@ SecurityServiceImpl::SecurityServiceImpl(const std::shared_ptr<dal::dao::Securit
 }
 
 grpc::Status SecurityServiceImpl::GetSecurity(grpc::ServerContext* context, const GetSecurityRequest* request, GetSecurityResponse* response) {
-    spdlog::info("Received GetSecurity request with symbol={}", request->symbol());
+    LOG(INFO) << "Received GetSecurity request with symbol=" << request->symbol();
 
     Security* security = response->mutable_security();
     security->set_symbol("VOO");
@@ -29,7 +30,6 @@ grpc::Status SecurityServiceImpl::GetSecurity(grpc::ServerContext* context, cons
 }
 
 grpc::Status SecurityServiceImpl::ListSecurities(grpc::ServerContext *context, const ListSecuritiesRequest *request, ListSecuritiesResponse *response) {
-    spdlog::info("Received ListStocks request with limit={}", request->page_size());
     return grpc::Status::OK;
 }
 

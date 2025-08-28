@@ -5,9 +5,9 @@
 #include "server.h"
 #include "grpcpp/server_builder.h"
 #include "grpcpp/security/server_credentials.h"
-#include "spdlog/spdlog.h"
 #include "../services/exchange_service.h"
 #include "../services/security_service.h"
+#include "absl/log/log.h"
 
 namespace api::server {
 
@@ -31,13 +31,13 @@ Server::Server(
     builder.RegisterService(&exchange_service);
 
     server_ = builder.BuildAndStart();
-    spdlog::info("Starting server on {}", server_address);
+    LOG(INFO) << "Starting server on " << server_address;
     server_->Wait();
 }
 
 void Server::Shutdown() const {
     server_->Shutdown();
-    spdlog::info("Successfully shutdown server");
+    LOG(INFO) << "Successfully shutdown server";
 }
 
 }
