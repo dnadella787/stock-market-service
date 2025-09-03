@@ -14,7 +14,7 @@ namespace api::service {
 
 class SecurityServiceImpl final : public SecurityService::Service {
 public:
-	SecurityServiceImpl(const std::shared_ptr<dal::dao::SecurityDao> &security_dao);
+	explicit SecurityServiceImpl(const std::shared_ptr<dal::dao::SecurityDao> &security_dao);
 
 	// API implementations
 	grpc::Status GetSecurity(grpc::ServerContext *context, const GetSecurityRequest *request,

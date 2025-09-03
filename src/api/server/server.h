@@ -10,14 +10,22 @@
 
 namespace api::server {
 
+struct ServerCfg {
+	std::string server_address;
+	std::string db_host;
+	int db_port;
+	std::string db_name;
+	std::string db_user;
+	std::string db_pwd;
+};
+
 class Server {
 public:
-	Server(const std::string &server_address, const std::string &db_host, const int &db_port,
-	       const std::string &db_name, const std::string &db_user, const std::string &db_pwd);
+	Server(const ServerCfg& cfg);
 	void Shutdown() const;
 
 private:
-	std::unique_ptr<grpc::Server> server_;
+	std::unique_ptr<grpc::Server> server_ = nullptr;
 };
 
 } // namespace api::server

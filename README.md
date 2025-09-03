@@ -28,3 +28,16 @@ to access db:
 ```bash 
 psql -h localhost -p 5432 -U localdbusr -d stock-db
 ```
+
+to build:
+```bash
+mkdir build 
+cd build
+CMAKE_POLICY_VERSION_MINIMUM=3.5 cmake ..
+cmake --build .
+```
+
+to run clang-format:
+```bash
+
+```

@@ -13,7 +13,7 @@ ExchangeDao::ExchangeDao(const std::shared_ptr<pqxx::connection> &pg_conn) : pg_
 	pg_conn_->prepare("get_exchange", "SELECT * FROM exchanges WHERE exchange_code = $1;");
 }
 
-std::unique_ptr<model::Exchange> ExchangeDao::GetExchange(const std::string &exchange_code) const {
+[[nodiscard]] std::unique_ptr<model::Exchange> ExchangeDao::GetExchange(const std::string &exchange_code) const {
 	pqxx::read_transaction txn {*pg_conn_};
 	try {
 		const pqxx::row res = txn.exec(pqxx::prepped("get_exchange"), pqxx::params(exchange_code)).one_row();

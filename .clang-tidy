@@ -1,0 +1,29 @@
+Checks: >
+  clang-analyzer-*,
+  bugprone-*,
+  performance-*,
+  modernize-*,
+  readability-*,
+  cppcoreguidelines-*,
+  hicpp-*,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-owning-memory,
+  -hicpp-avoid-c-arrays,
+  -hicpp-no-array-decay,
+  -hicpp-use-auto,
+  -modernize-use-trailing-return-type,
+  -modernize-use-auto
+
+WarningsAsErrors: ''
+HeaderFilterRegex: '.*'
+FormatStyle: none
+CheckOptions:
+  - key:             modernize-use-nullptr.NullMacros
+    value:           'NULL'
+  - key:             modernize-use-nullptr.NullPtrs
+    value:           '0'
+  - key:             modernize-use-override.IgnoreDestructors
+    value:           '1'
+  - key:             cppcoreguidelines-pro-type-member-init.IgnoreArrays
+    value:           'true'

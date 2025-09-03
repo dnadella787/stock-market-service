@@ -14,7 +14,7 @@ namespace dal::dao {
 class ExchangeDao {
 public:
 	explicit ExchangeDao(const std::shared_ptr<pqxx::connection> &pg_conn);
-	std::unique_ptr<model::Exchange> GetExchange(const std::string &exchange_code) const;
+	[[nodiscard]] std::unique_ptr<model::Exchange> GetExchange(const std::string &exchange_code) const;
 	static constexpr std::string_view ExchangeEntityType = "Exchange";
 
 private:

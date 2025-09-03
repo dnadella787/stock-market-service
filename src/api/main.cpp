@@ -31,9 +31,15 @@ int main(const int argc, char *argv[]) {
 	// parse flags
 	CLI11_PARSE(app, argc, argv);
 
-	absl::absl::SetLogColorMessageStyle(absl::LogColorMessageStyle::kAlways);
 	// create and start server
-	api::server::Server server(server_address, db_host, db_port, db_name, db_user, db_pwd);
+	api::server::Server server({
+		.server_address = server_address,
+		.db_host = db_host,
+		.db_port = db_port,
+		.db_name = db_name,
+		.db_user = db_user,
+		.db_pwd = db_pwd,
+	});
 
 	return 0;
 }
