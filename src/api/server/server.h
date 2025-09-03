@@ -12,14 +12,14 @@ namespace api::server {
 
 class Server {
 public:
-    Server(const std::string& server_address, const std::string& db_host, const int& db_port, const std::string& db_name, const std::string& db_user, const std::string& db_pwd);
-    void Shutdown() const;
+	Server(const std::string &server_address, const std::string &db_host, const int &db_port,
+	       const std::string &db_name, const std::string &db_user, const std::string &db_pwd);
+	void Shutdown() const;
+
 private:
-    std::unique_ptr<grpc::Server> server_;
+	std::unique_ptr<grpc::Server> server_;
 };
 
-}
+} // namespace api::server
 
-
-
-#endif //API_SERVER_H
+#endif // API_SERVER_H

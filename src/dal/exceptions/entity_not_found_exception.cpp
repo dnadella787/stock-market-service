@@ -8,7 +8,8 @@
 
 namespace dal::exception {
 
-EntityNotFoundException::EntityNotFoundException(std::string_view entity_type, const std::string& entity_identifier)
-    : std::runtime_error(std::format("{} '{}' not found.", entity_type, entity_identifier)) {}
-
+EntityNotFoundException::EntityNotFoundException(std::string_view entity_type, const std::string &entity_identifier)
+    : std::runtime_error(std::format("{} '{}' not found.", entity_type, entity_identifier)) {
 }
+
+} // namespace dal::exception

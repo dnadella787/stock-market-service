@@ -14,15 +14,18 @@ namespace api::service {
 
 class SecurityServiceImpl final : public SecurityService::Service {
 public:
-    SecurityServiceImpl(const std::shared_ptr<dal::dao::SecurityDao> &security_dao);
+	SecurityServiceImpl(const std::shared_ptr<dal::dao::SecurityDao> &security_dao);
 
-    // API implementations
-    grpc::Status GetSecurity(grpc::ServerContext *context, const GetSecurityRequest *request, GetSecurityResponse *response) override;
-    grpc::Status ListSecurities(grpc::ServerContext *context, const ListSecuritiesRequest *request, ListSecuritiesResponse *response) override;
+	// API implementations
+	grpc::Status GetSecurity(grpc::ServerContext *context, const GetSecurityRequest *request,
+	                         GetSecurityResponse *response) override;
+	grpc::Status ListSecurities(grpc::ServerContext *context, const ListSecuritiesRequest *request,
+	                            ListSecuritiesResponse *response) override;
+
 private:
-    std::shared_ptr<dal::dao::SecurityDao> security_dao_;
+	std::shared_ptr<dal::dao::SecurityDao> security_dao_;
 };
 
-}
+} // namespace api::service
 
-#endif //SECURITY_SERVICE_H
+#endif // SECURITY_SERVICE_H

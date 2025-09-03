@@ -10,12 +10,12 @@
 namespace dal::model {
 
 class Security {
-    Security(const std::string& symbol, const std::string& company_name, const std::string& exchange_code);
-    std::string symbol;
-    std::string company_name;
-    std::string exchange_code;
+	Security(const std::string &symbol, const std::string &company_name, const std::string &exchange_code);
+	std::string symbol;
+	std::string company_name;
+	std::string exchange_code;
 };
 
-}
+} // namespace dal::model
 
-#endif //SECURITY_H
+#endif // SECURITY_H
