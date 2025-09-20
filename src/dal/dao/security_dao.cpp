@@ -2,7 +2,7 @@
 // Created by Dhanush Nadella on 8/23/25.
 //
 
-#include "dao/security_dao.h"
+#include "dal/dao/security_dao.h"
 
 namespace dal::dao {
 

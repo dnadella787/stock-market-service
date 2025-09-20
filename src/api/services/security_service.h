@@ -6,7 +6,7 @@
 #define SECURITY_SERVICE_H
 #include <service/security.grpc.pb.h>
 
-#include "../../dal/include/dao/security_dao.h"
+#include "dal/dao/security_dao.h"
 
 using namespace service;
 

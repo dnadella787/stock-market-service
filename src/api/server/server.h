@@ -6,22 +6,14 @@
 #define API_SERVER_H
 #include <string>
 
+#include "../config/server_config.h"
 #include "grpcpp/server.h"
 
 namespace api::server {
 
-struct ServerCfg {
-	std::string server_address;
-	std::string db_host;
-	int db_port;
-	std::string db_name;
-	std::string db_user;
-	std::string db_pwd;
-};
-
 class Server {
 public:
-	Server(const ServerCfg& cfg);
+	Server(const config::ApiServerCfg &cfg);
 	void Shutdown() const;
 
 private:

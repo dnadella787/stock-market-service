@@ -39,5 +39,10 @@ cmake --build .
 
 to run clang-format:
 ```bash
+find ./src -type f \( -name "*.h" -o -name "*.cpp" \) -exec clang-format -i {} +
+```
 
+to run clang-tidy:
+```bash
+find ./src -type f \( -name "*.h" -o -name "*.cpp" \) | xargs -I{} /opt/homebrew/opt/llvm/bin/clang-tidy {} -p build --header-filter='^./src/.*'
 ```

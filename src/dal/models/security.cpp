@@ -2,7 +2,7 @@
 // Created by Dhanush Nadella on 8/24/25.
 //
 
-#include "models/security.h"
+#include "dal/models/security.h"
 
 namespace dal::model {
 

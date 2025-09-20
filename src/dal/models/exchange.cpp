@@ -2,7 +2,7 @@
 // Created by Dhanush Nadella on 8/24/25.
 //
 
-#include "models/exchange.h"
+#include "dal/models/exchange.h"
 
 namespace dal::model {
 

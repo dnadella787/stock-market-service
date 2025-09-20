@@ -2,9 +2,8 @@
 // Created by Dhanush Nadella on 8/24/25.
 //
 
-#include "exceptions/entity_not_found_exception.h"
+#include "dal/exceptions/entity_not_found_exception.h"
 #include <format>
-#include <stdexcept>
 
 namespace dal::exception {
 

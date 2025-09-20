@@ -4,7 +4,7 @@
 
 #ifndef EXCHANGE_SERVICE_H
 #define EXCHANGE_SERVICE_H
-#include "../../dal/include/dao/exchange_dao.h"
+#include "dal/dao/exchange_dao.h"
 #include "service/exchange.grpc.pb.h"
 
 using namespace service;

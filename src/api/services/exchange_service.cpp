@@ -5,7 +5,7 @@
 #include "exchange_service.h"
 
 #include "absl/log/log.h"
-#include "exceptions/entity_not_found_exception.h"
+#include "dal/exceptions/entity_not_found_exception.h"
 
 using namespace service;
 

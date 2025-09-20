@@ -2,8 +2,8 @@
 // Created by Dhanush Nadella on 8/23/25.
 //
 
-#include "dao/exchange_dao.h"
-#include "exceptions/entity_not_found_exception.h"
+#include "dal/dao/exchange_dao.h"
+#include "dal/exceptions/entity_not_found_exception.h"
 #include <format>
 #include <pqxx/transaction>
 
