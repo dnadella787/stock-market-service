@@ -8,14 +8,25 @@
 #include "nlohmann/json.hpp"
 #include <format>
 #include <fstream>
+#include "util.h"
 
 namespace common::config {
 
 class Loader {
-    public:
+private:
+    static constexpr const char* CONFIG_LOCATION_ENV_VAR = "CONFIG_LOCATION";
+    static constexpr std::string DEFAULT_CONFIG_LOCATION = "../../../config/";
+    static constexpr std::string BASE_CONFIG_FILE = "base.json";
+
+public:
     template<typename T>
-    T Load(const std::string_view env) {
-        std::string path = std::format("../../../config/{}.json", env);
+    T Load(const std::string env_string) {
+        const char* config_location = common::util::LoadEnvVar();
+        
+        std::ifstream config_file(config_location, std::ios::binary);
+
+        std::string path = std::format("base.json");
+        std::vector<std::string> envs = std::views::split(env_string, ',');
         std::ifstream file(path);
 
         if (!file.is_open()) {
