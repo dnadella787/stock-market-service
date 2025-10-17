@@ -5,35 +5,53 @@
 #ifndef LOADER_H
 #define LOADER_H
 
+#include "absl/log/log.h"
 #include "nlohmann/json.hpp"
 #include <format>
 #include <fstream>
-#include "util.h"
 
 namespace common::config {
 
 class Loader {
 private:
     static constexpr const char* CONFIG_LOCATION_ENV_VAR = "CONFIG_LOCATION";
-    static constexpr std::string DEFAULT_CONFIG_LOCATION = "../../../config/";
-    static constexpr std::string BASE_CONFIG_FILE = "base.json";
+    static constexpr const char* BASE_CONFIG_FILE = "base.json";
 
 public:
     template<typename T>
-    T Load(const std::string env_string) {
-        const char* config_location = common::util::LoadEnvVar();
-        
-        std::ifstream config_file(config_location, std::ios::binary);
+    T Load(const std::string_view env_string) {
+        // 1. Get CONFIG_LOCATION environment variable
+        const char* env_ptr = std::getenv(CONFIG_LOCATION_ENV_VAR);
+        if (!env_ptr) {
+            throw std::runtime_error(std::format(
+                "{} environment variable could not be found", CONFIG_LOCATION_ENV_VAR));
+        }
+        std::filesystem::path config_location = env_ptr;
 
-        std::string path = std::format("base.json");
-        std::vector<std::string> envs = std::views::split(env_string, ',');
-        std::ifstream file(path);
-
-        if (!file.is_open()) {
-            throw std::runtime_error("Could not open config file: " + path);
+        // 2. Load base config
+        std::filesystem::path base_path = config_location / BASE_CONFIG_FILE;
+        std::ifstream base_file(base_path, std::ios::binary);
+        if (!base_file.is_open()) {
+            throw std::runtime_error("Could not open config file: " + base_path.string());
         }
 
-        nlohmann::json j = nlohmann::json::parse(file);
+        nlohmann::json j = nlohmann::json::parse(base_file);
+
+        // 3. Apply overrides from env_string (comma-separated)
+        for (auto&& env : std::views::split(env_string, ',')) {
+            std::string_view env_name(&*env.begin(), std::ranges::distance(env));
+            LOG(INFO) <
+            std::filesystem::path override_path = config_location / std::format("{}.json", env_name);
+
+            std::ifstream override_file(override_path);
+            if (!override_file.is_open()) {
+                throw std::runtime_error("Could not open config file: " + override_path.string());
+            }
+
+            j.update(nlohmann::json::parse(override_file));
+        }
+
+        // 4. Convert JSON to target class
         return j.get<T>();
     }
 };
