@@ -13,4 +13,4 @@ add_library(common_lib ${srcs})
 # Make headers in this lib visible to others that link against it
 target_include_directories(common_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-target_link_libraries(common_lib PUBLIC nlohmann_json::nlohmann_json)
+target_link_libraries(common_lib PUBLIC nlohmann_json::nlohmann_json PRIVATE absl::log)

@@ -26,6 +26,7 @@ public:
 			throw std::runtime_error(
 			    std::format("{} environment variable could not be found", CONFIG_LOCATION_ENV_VAR));
 		}
+		LOG(INFO) << "Loading config from " << env_ptr;
 		std::filesystem::path config_location = env_ptr;
 
 		// 2. Load base config
@@ -36,6 +37,7 @@ public:
 		}
 
 		nlohmann::json j = nlohmann::json::parse(base_file);
+		LOG(INFO) << "Successfully loaded base config from " << base_path.string();
 
 		// 3. Apply overrides from env_string (comma-separated)
 		for (auto &&env : std::views::split(env_string, ',')) {
@@ -48,6 +50,7 @@ public:
 			}
 
 			j.update(nlohmann::json::parse(override_file));
+			LOG(INFO) << "Successfully loaded " << env_name << " override config from " << override_path.string();
 		}
 
 		// 4. Convert JSON to target class
