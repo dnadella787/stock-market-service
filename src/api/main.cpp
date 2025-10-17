@@ -15,9 +15,7 @@ int main(const int argc, char *argv[]) {
 
 	// Setup CLI flag parsing logic
 	CLI::App app {"Start a gRPC server that returns stock market data"};
-	app.add_option("--env", env,
-	               "Env to use (local, beta, prod)")
-	    ->default_val("prod");
+	app.add_option("--env", env, "Env to use (local, beta, prod)")->default_val("prod");
 
 	// parse flags
 	CLI11_PARSE(app, argc, argv);

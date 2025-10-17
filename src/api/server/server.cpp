@@ -12,9 +12,9 @@
 namespace api::server {
 
 Server::Server(const config::ApiServerCfg &cfg) {
-	const std::shared_ptr<pqxx::connection> pg_conn =
-	    std::make_shared<pqxx::connection>(std::format("host={} port={} dbname={} user={} password={}", cfg.db_config_.host_,
-	                                                   cfg.db_config_.port_, cfg.db_config_.name_, cfg.db_config_.username_, cfg.db_config_.password_));
+	const std::shared_ptr<pqxx::connection> pg_conn = std::make_shared<pqxx::connection>(
+	    std::format("host={} port={} dbname={} user={} password={}", cfg.db_config_.host_, cfg.db_config_.port_,
+	                cfg.db_config_.name_, cfg.db_config_.username_, cfg.db_config_.password_));
 	const std::shared_ptr<dal::dao::ExchangeDao> exchange_dao = std::make_shared<dal::dao::ExchangeDao>(pg_conn);
 	const std::shared_ptr<dal::dao::SecurityDao> security_dao = std::make_shared<dal::dao::SecurityDao>(pg_conn);
 

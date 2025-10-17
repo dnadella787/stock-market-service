@@ -16,7 +16,7 @@ struct ApiServerCfg {
 	dal::config::DbConfig db_config_;
 };
 
-inline void from_json(const nlohmann::json& json, ApiServerCfg& cfg) {
+inline void from_json(const nlohmann::json &json, ApiServerCfg &cfg) {
 	json.at("serverAddress").get_to(cfg.server_address_);
 	json.at("dbConfig").get_to(cfg.db_config_);
 }

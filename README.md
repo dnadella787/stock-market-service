@@ -10,13 +10,19 @@ find ./api/proto/ -name "*.proto" -exec ~/Downloads/protoc-31.1-osx-aarch_64/bin
 
 to start server:
 ```bash
-./cmake-build-debug/src/api/stock-market-api --db-host localhost --db-port 5432 --db-name stock-db --db-user localdbusr --db-pwd localdbpwd
+export CONFIG_LOCATION={PathToRepo}/stock-market-service/config
+./cmake-build-debug/src/api/stock-market-api --env local 
 ```
 
-to start local db:
+to start local db for first time:
 ```bash
 cd postgresdb/local-docker
 docker compose up # add -d for detached mode 
+```
+
+to start up local db every other time
+```bash 
+docker start stock-db
 ```
 
 to initialize local DB with some basic data and schema:

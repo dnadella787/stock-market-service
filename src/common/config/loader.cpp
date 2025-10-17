@@ -7,6 +7,4 @@
 #include <fstream>
 #include <format>
 
-
-namespace common::config {
-}
+namespace common::config {}
