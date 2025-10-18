@@ -5,7 +5,7 @@
 #include <CLI/CLI.hpp>
 
 #include "absl/log/globals.h"
-#include "common/config/loader.h"
+#include "common/config/config_loader.h"
 #include "grpcpp/security/server_credentials.h"
 #include "server/server.h"
 
@@ -20,10 +20,15 @@ int main(const int argc, char *argv[]) {
 	// parse flags
 	CLI11_PARSE(app, argc, argv);
 
-	common::config::Loader l;
-	const api::config::ApiServerCfg cfg = l.Load<api::config::ApiServerCfg>(env);
-	// create and start server
-	api::server::Server server(cfg);
+	try {
+		const api::config::ApiServerCfg cfg = common::config::ConfigLoader::Load<api::config::ApiServerCfg>(env);
+
+		// create and start server
+		api::server::Server server(cfg);
+	} catch (const std::exception &e) {
+		LOG(ERROR) << e.what();
+	}
+
 
 	return 0;
 }

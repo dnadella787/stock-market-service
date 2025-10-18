@@ -12,14 +12,16 @@
 
 namespace common::config {
 
-class Loader {
+class ConfigLoader {
 private:
 	static constexpr const char *CONFIG_LOCATION_ENV_VAR = "CONFIG_LOCATION";
 	static constexpr const char *BASE_CONFIG_FILE = "base.json";
 
 public:
+	ConfigLoader() = delete; // static class, prevent instantiation
+
 	template <typename T>
-	T Load(const std::string_view env_string) {
+	static T Load(const std::string_view env_string) {
 		// 1. Get CONFIG_LOCATION environment variable
 		const char *env_ptr = std::getenv(CONFIG_LOCATION_ENV_VAR);
 		if (!env_ptr) {

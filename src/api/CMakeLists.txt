@@ -1,4 +1,5 @@
-add_executable(stock-market-api main.cpp
+add_executable(
+        stock-market-api main.cpp
         server/server.cpp
         server/server.h
         services/exchange_service.cpp
@@ -7,4 +8,12 @@ add_executable(stock-market-api main.cpp
         services/security_service.h
         config/server_config.h
 )
-target_link_libraries(stock-market-api PRIVATE CLI11 proto_lib common_lib dal_lib)
+
+target_link_libraries(
+        stock-market-api
+        PRIVATE
+            CLI11
+            proto_lib
+            common_lib
+            dal_lib
+)
