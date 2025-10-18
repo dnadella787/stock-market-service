@@ -9,7 +9,7 @@
 namespace common::config::exception {
 
 ConfigFileNotFoundException::ConfigFileNotFoundException(std::string_view file_name)
-    : std::runtime_error(std::format("Config file '{}' could not be found.")) {
+    : std::runtime_error(std::format("Config file '{}' could not be found.", file_name)) {
 }
 
 } // namespace common::config::exception

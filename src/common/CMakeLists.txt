@@ -6,20 +6,11 @@ FetchContent_Declare(
         v3.12.0)
 FetchContent_MakeAvailable(json)
 
-# Create interface lib (no cpp files, header only)
-add_library(common_lib INTERFACE)
+# Build lib from all common cpp + header files
+file(GLOB_RECURSE srcs "*.cpp")
+add_library(common_lib ${srcs})
 
 # Make headers in this lib visible to others that link against it
-target_include_directories(
-        common_lib
-        INTERFACE
-            ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
+target_include_directories(common_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-# Link dependencies (header-only and external)
-target_link_libraries(
-        common_lib
-        INTERFACE
-            nlohmann_json::nlohmann_json
-            absl::log
-)
+target_link_libraries(common_lib PUBLIC nlohmann_json::nlohmann_json PRIVATE absl::log)
