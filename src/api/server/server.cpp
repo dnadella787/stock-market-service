@@ -11,33 +11,30 @@
 
 namespace api::server {
 
-Server::Server(
-            const std::string &server_address,
-            const std::string &db_host,
-            const int &db_port,
-            const std::string &db_name,
-            const std::string &db_user,
-            const std::string &db_pwd) {
-    const std::shared_ptr<pqxx::connection> pg_conn = std::make_shared<pqxx::connection>(std::format("host={} port={} dbname={} user={} password={}", db_host, db_port, db_name, db_user, db_pwd));
-    const std::shared_ptr<dal::dao::ExchangeDao> exchange_dao = std::make_shared<dal::dao::ExchangeDao>(pg_conn);
-    const std::shared_ptr<dal::dao::SecurityDao> security_dao = std::make_shared<dal::dao::SecurityDao>(pg_conn);
+Server::Server(const config::ApiServerCfg &cfg) {
+	// TODO: write pqxx::connection wrapper and pass it off to DAL
+	const std::shared_ptr<pqxx::connection> pg_conn = std::make_shared<pqxx::connection>(
+	    std::format("host={} port={} dbname={} user={} password={}", cfg.db_config_.host_, cfg.db_config_.port_,
+	                cfg.db_config_.name_, cfg.db_config_.username_, cfg.db_config_.password_));
+	const std::shared_ptr<dal::dao::ExchangeDao> exchange_dao = std::make_shared<dal::dao::ExchangeDao>(pg_conn);
+	const std::shared_ptr<dal::dao::SecurityDao> security_dao = std::make_shared<dal::dao::SecurityDao>(pg_conn);
 
-    service::SecurityServiceImpl security_service(security_dao);
-    service::ExchangeServiceImpl exchange_service(exchange_dao);
+	service::SecurityServiceImpl security_service(security_dao);
+	service::ExchangeServiceImpl exchange_service(exchange_dao);
 
-    grpc::ServerBuilder builder;
-    builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
-    builder.RegisterService(&security_service);
-    builder.RegisterService(&exchange_service);
+	grpc::ServerBuilder builder;
+	builder.AddListeningPort(cfg.server_address_, grpc::InsecureServerCredentials());
+	builder.RegisterService(&security_service);
+	builder.RegisterService(&exchange_service);
 
-    server_ = builder.BuildAndStart();
-    LOG(INFO) << "Starting server on " << server_address;
-    server_->Wait();
+	server_ = builder.BuildAndStart();
+	LOG(INFO) << "Starting server on " << cfg.server_address_;
+	server_->Wait();
 }
 
 void Server::Shutdown() const {
-    server_->Shutdown();
-    LOG(INFO) << "Successfully shutdown server";
+	server_->Shutdown();
+	LOG(INFO) << "Successfully shutdown server";
 }
 
-}
+} // namespace api::server

@@ -13,5 +13,6 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(CLI11)
 
 add_subdirectory(grpc-contract)
+add_subdirectory(src/common)
 add_subdirectory(src/dal)
 add_subdirectory(src/api)

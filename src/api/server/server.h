@@ -6,20 +6,20 @@
 #define API_SERVER_H
 #include <string>
 
+#include "../config/server_config.h"
 #include "grpcpp/server.h"
 
 namespace api::server {
 
 class Server {
 public:
-    Server(const std::string& server_address, const std::string& db_host, const int& db_port, const std::string& db_name, const std::string& db_user, const std::string& db_pwd);
-    void Shutdown() const;
+	Server(const config::ApiServerCfg &cfg);
+	void Shutdown() const;
+
 private:
-    std::unique_ptr<grpc::Server> server_;
+	std::unique_ptr<grpc::Server> server_ = nullptr;
 };
 
-}
+} // namespace api::server
 
-
-
-#endif //API_SERVER_H
+#endif // API_SERVER_H
