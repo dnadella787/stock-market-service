@@ -6,6 +6,7 @@
 
 namespace common::config::exception {
 
-ConfigLoaderException::ConfigLoaderException(const std::string &error_msg) : std::runtime_error(error_msg) {}
+ConfigLoaderException::ConfigLoaderException(const std::string &error_msg) : std::runtime_error(error_msg) {
+}
 
 } // namespace common::config::exception

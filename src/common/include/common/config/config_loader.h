@@ -36,7 +36,8 @@ public:
 		std::filesystem::path base_path = config_location / BASE_CONFIG_FILE;
 		std::ifstream base_file(base_path, std::ios::binary);
 		if (!base_file.is_open()) {
-			throw exception::ConfigLoaderException(std::format("Config file '{}' could not be found", base_path.string()));
+			throw exception::ConfigLoaderException(
+			    std::format("Config file '{}' could not be found", base_path.string()));
 		}
 
 		nlohmann::json j = nlohmann::json::parse(base_file);
@@ -49,7 +50,8 @@ public:
 
 			std::ifstream override_file(override_path);
 			if (!override_file.is_open()) {
-				throw exception::ConfigLoaderException(std::format("Config file '{}' could not be found", override_path.string()));
+				throw exception::ConfigLoaderException(
+				    std::format("Config file '{}' could not be found", override_path.string()));
 			}
 
 			j.update(nlohmann::json::parse(override_file));
