@@ -12,7 +12,7 @@ namespace dal::exception {
 
 class EntityNotFoundException : public std::runtime_error {
 public:
-	EntityNotFoundException(std::string_view entity_type, const std::string &entity_identifier);
+	EntityNotFoundException(std::string_view entity_type, std::string_view entity_identifier);
 };
 
 } // namespace dal::exception

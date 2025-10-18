@@ -12,6 +12,7 @@
 namespace api::server {
 
 Server::Server(const config::ApiServerCfg &cfg) {
+	// TODO : write pqxx::connection wrapper and pass it off to DAL
 	const std::shared_ptr<pqxx::connection> pg_conn = std::make_shared<pqxx::connection>(
 	    std::format("host={} port={} dbname={} user={} password={}", cfg.db_config_.host_, cfg.db_config_.port_,
 	                cfg.db_config_.name_, cfg.db_config_.username_, cfg.db_config_.password_));

@@ -31,12 +31,11 @@ grpc::Status ExchangeServiceImpl::GetExchange(grpc::ServerContext *context, cons
 		return grpc::Status::OK;
 	} catch (const dal::exception::EntityNotFoundException &e) {
 		LOG(ERROR) << "No exchange in DB with exchange_code=" << request->code();
-		return grpc::Status(grpc::StatusCode::NOT_FOUND, e.what());
+		return {grpc::StatusCode::NOT_FOUND, e.what()};
 	} catch (const std::exception &e) {
 		LOG(ERROR) << "Getting exchange from DB with exchange_code=" << request->code()
-		           << " resulted in unknown exception=",
-		    e.what();
-		return grpc::Status(grpc::StatusCode::INTERNAL, "Internal server error");
+		           << " resulted in unknown exception=" << e.what();
+		return {grpc::StatusCode::INTERNAL, "Internal server error"};
 	}
 }
 

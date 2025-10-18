@@ -25,10 +25,15 @@ int main(const int argc, char *argv[]) {
 
 		// create and start server
 		api::server::Server server(cfg);
+	} catch (const common::config::exception::ConfigFileNotFoundException &e) {
+		LOG(ERROR) << "Exception while loading API server config: " << e.what();
+		LOG(INFO) << "Exiting gracefully without starting server...";
+		exit(-1);
 	} catch (const std::exception &e) {
-		LOG(ERROR) << e.what();
+		LOG(ERROR) << "Unknown exception occurred: " << e.what();
+		LOG(INFO) << "Exiting gracefully without starting server...";
+		exit(-1);
 	}
-
 
 	return 0;
 }

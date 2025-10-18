@@ -10,6 +10,8 @@
 #include <format>
 #include <fstream>
 
+#include "config_file_not_found_exception.h"
+
 namespace common::config {
 
 class ConfigLoader {
@@ -35,7 +37,7 @@ public:
 		std::filesystem::path base_path = config_location / BASE_CONFIG_FILE;
 		std::ifstream base_file(base_path, std::ios::binary);
 		if (!base_file.is_open()) {
-			throw std::runtime_error("Could not open config file: " + base_path.string());
+			throw exception::ConfigFileNotFoundException(base_path.string());
 		}
 
 		nlohmann::json j = nlohmann::json::parse(base_file);
@@ -48,7 +50,7 @@ public:
 
 			std::ifstream override_file(override_path);
 			if (!override_file.is_open()) {
-				throw std::runtime_error("Could not open config file: " + override_path.string());
+				throw exception::ConfigFileNotFoundException(override_path.string());
 			}
 
 			j.update(nlohmann::json::parse(override_file));
