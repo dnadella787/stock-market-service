@@ -22,16 +22,12 @@ int main(const int argc, char *argv[]) {
 
 	try {
 		const api::config::ApiServerCfg cfg = common::config::ConfigLoader::Load<api::config::ApiServerCfg>(env);
-
-		// create and start server
 		api::server::Server server(cfg);
 	} catch (const common::config::exception::ConfigLoaderException &e) {
 		LOG(ERROR) << "Exception while loading API server config: " << e.what();
-		LOG(INFO) << "Exiting gracefully without starting server...";
 		exit(-1);
 	} catch (const std::exception &e) {
 		LOG(ERROR) << "Unknown exception occurred: " << e.what();
-		LOG(INFO) << "Exiting gracefully without starting server...";
 		exit(-1);
 	}
 
