@@ -10,9 +10,9 @@
 
 namespace common::config::exception {
 
-class ConfigFileNotFoundException : public std::runtime_error {
+class ConfigLoaderException : public std::runtime_error {
 public:
-	ConfigFileNotFoundException(std::string_view file_name);
+	ConfigLoaderException(const std::string &error_msg);
 };
 
 } // namespace common::config::exception
