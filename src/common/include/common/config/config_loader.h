@@ -10,7 +10,7 @@
 #include <format>
 #include <fstream>
 
-#include "config_file_not_found_exception.h"
+#include "config_loader_exception.h"
 
 namespace common::config {
 
@@ -27,8 +27,7 @@ public:
 		// 1. Get CONFIG_LOCATION environment variable
 		const char *env_ptr = std::getenv(CONFIG_LOCATION_ENV_VAR);
 		if (!env_ptr) {
-			throw std::runtime_error(
-			    std::format("{} environment variable could not be found", CONFIG_LOCATION_ENV_VAR));
+			throw exception::ConfigLoaderException(std::format("{} env var not found", CONFIG_LOCATION_ENV_VAR));
 		}
 		LOG(INFO) << "Loading config from " << env_ptr;
 		std::filesystem::path config_location = env_ptr;
@@ -37,7 +36,7 @@ public:
 		std::filesystem::path base_path = config_location / BASE_CONFIG_FILE;
 		std::ifstream base_file(base_path, std::ios::binary);
 		if (!base_file.is_open()) {
-			throw exception::ConfigFileNotFoundException(base_path.string());
+			throw exception::ConfigLoaderException(std::format("Config file '{}' could not be found", base_path.string()));
 		}
 
 		nlohmann::json j = nlohmann::json::parse(base_file);
@@ -50,7 +49,7 @@ public:
 
 			std::ifstream override_file(override_path);
 			if (!override_file.is_open()) {
-				throw exception::ConfigFileNotFoundException(override_path.string());
+				throw exception::ConfigLoaderException(std::format("Config file '{}' could not be found", override_path.string()));
 			}
 
 			j.update(nlohmann::json::parse(override_file));
