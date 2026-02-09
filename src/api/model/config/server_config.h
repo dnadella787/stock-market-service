@@ -7,7 +7,7 @@
 
 #include <string>
 
-#include "dal/config/db_config.h"
+#include "dal/models/config/db_config.h"
 
 namespace api::config {
 

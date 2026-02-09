@@ -6,7 +6,7 @@
 #define API_SERVER_H
 #include <string>
 
-#include "../config/server_config.h"
+#include "../model/config/server_config.h"
 #include "grpcpp/server.h"
 
 namespace api::server {

@@ -1,7 +1,7 @@
 {
   "serverAddress": "127.0.0.1:21000",
   "dbConfig": {
-    "name": "stock-db",
+    "name": "api-db",
     "host": "localhost",
     "port": 5432,
     "username": "localdbusr",

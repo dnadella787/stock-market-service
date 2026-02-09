@@ -1,4 +1,7 @@
-cmake_minimum_required(VERSION 3.31)
+cmake_minimum_required(VERSION 3.25...4.1) # Or whatever your version is
+
+# This is the magic line for CMake 4.x compatibility
+set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
 project(stock-market-service)
 set(CMAKE_CXX_STANDARD 20)
 set(FETCHCONTENT_QUIET OFF)

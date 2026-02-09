@@ -1,0 +1,10 @@
+services:
+  engine-db:
+    image: "postgres"
+    container_name: "engine-db"
+    environment:
+      POSTGRES_PASSWORD: localdbpwd
+      POSTGRES_DB: engine-db
+      POSTGRES_USER: localdbusr
+    ports:
+      - "5433:5432"

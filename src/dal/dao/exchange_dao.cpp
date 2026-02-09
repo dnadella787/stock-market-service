@@ -3,18 +3,20 @@
 //
 
 #include "dal/dao/exchange_dao.h"
+
+#include "../store/connection_handler_internal.h"
+#include "dal/connection/postgres_data_store.h"
 #include "dal/exceptions/entity_not_found_exception.h"
-#include <format>
 #include <pqxx/transaction>
 
 namespace dal::dao {
 
-ExchangeDao::ExchangeDao(const std::shared_ptr<pqxx::connection> &pg_conn) : pg_conn_(pg_conn) {
-	pg_conn_->prepare("get_exchange", "SELECT * FROM exchanges WHERE exchange_code = $1;");
+ExchangeDao::ExchangeDao(const std::shared_ptr<store::PostgresDataStore> &pg) : pg_(pg) {
+	pg_->get_handler()->PrepareStatement("get_exchange", "SELECT * FROM exchanges WHERE exchange_code = $1;");
 }
 
 [[nodiscard]] std::unique_ptr<model::Exchange> ExchangeDao::GetExchange(const std::string &exchange_code) const {
-	pqxx::read_transaction txn {*pg_conn_};
+	pqxx::read_transaction txn = pg_->get_handler()->GetReadTransaction();
 	try {
 		const pqxx::row res = txn.exec(pqxx::prepped("get_exchange"), pqxx::params(exchange_code)).one_row();
 		return std::make_unique<model::Exchange>(res["exchange_code"].as<std::string>(),

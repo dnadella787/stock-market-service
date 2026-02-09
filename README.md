@@ -10,7 +10,7 @@ find ./api/proto/ -name "*.proto" -exec ~/Downloads/protoc-31.1-osx-aarch_64/bin
 
 to start server:
 ```bash
-export CONFIG_LOCATION={PathToRepo}/stock-market-service/config
+export CONFIG_LOCATION={PathToRepo}/stock-market-service/src/api/config
 ./cmake-build-debug/src/api/stock-market-api --env local 
 ```
 

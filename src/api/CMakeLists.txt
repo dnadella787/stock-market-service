@@ -1,12 +1,13 @@
 add_executable(
-        stock-market-api main.cpp
+        stock-market-api
+        main.cpp
         server/server.cpp
         server/server.h
         services/exchange_service.cpp
         services/exchange_service.h
         services/security_service.cpp
         services/security_service.h
-        config/server_config.h
+        model/config/server_config.h
 )
 
 target_link_libraries(

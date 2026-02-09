@@ -4,16 +4,17 @@
 
 #ifndef SECURITY_DAO_H
 #define SECURITY_DAO_H
-#include <pqxx/connection>
+
+#include "dal/connection/postgres_data_store.h"
 
 namespace dal::dao {
 
 class SecurityDao {
 public:
-	explicit SecurityDao(const std::shared_ptr<pqxx::connection> &pg_conn);
+	explicit SecurityDao(const std::shared_ptr<store::PostgresDataStore> &pg);
 	// model::Security GetSecurity(std::string& symbol);
 private:
-	std::shared_ptr<pqxx::connection> pg_conn_;
+	std::shared_ptr<store::PostgresDataStore> pg_;
 };
 
 } // namespace dal::dao

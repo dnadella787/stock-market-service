@@ -4,21 +4,21 @@
 
 #ifndef EXCHANGE_DAO_H
 #define EXCHANGE_DAO_H
-#include <memory>
 
-#include "../models/exchange.h"
-#include <pqxx/connection>
+#include "dal/connection/postgres_data_store.h"
+#include "dal/models/exchange.h"
+#include <memory>
 
 namespace dal::dao {
 
 class ExchangeDao {
 public:
-	explicit ExchangeDao(const std::shared_ptr<pqxx::connection> &pg_conn);
-	[[nodiscard]] std::unique_ptr<model::Exchange> GetExchange(const std::string &exchange_code) const;
 	static constexpr std::string_view ExchangeEntityType = "Exchange";
 
+	explicit ExchangeDao(const std::shared_ptr<store::PostgresDataStore> &pg_conn);
+	[[nodiscard]] std::unique_ptr<model::Exchange> GetExchange(const std::string &exchange_code) const;
 private:
-	std::shared_ptr<pqxx::connection> pg_conn_;
+	std::shared_ptr<store::PostgresDataStore> pg_;
 };
 
 } // namespace dal::dao
