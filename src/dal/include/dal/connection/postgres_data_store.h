@@ -11,6 +11,7 @@ namespace dal::dao {
 class ExchangeDao;
 class SecurityDao;
 }
+
 namespace dal::store {
 
 class PostgresDataStore {
