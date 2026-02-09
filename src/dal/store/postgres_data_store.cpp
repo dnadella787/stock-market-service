@@ -18,4 +18,6 @@ PostgresDataStore::PostgresDataStore(
 		host, port, db_name, user, password));
 }
 
+PostgresDataStore::~PostgresDataStore() = default;
+
 }

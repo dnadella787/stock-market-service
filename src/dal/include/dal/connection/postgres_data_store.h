@@ -22,6 +22,8 @@ public:
 		const std::string &db_name,
 		const std::string &user,
 		const std::string &password);
+
+	~PostgresDataStore();
 private:
 	class ConnectionHandler;
 	std::unique_ptr<ConnectionHandler> handler_;
