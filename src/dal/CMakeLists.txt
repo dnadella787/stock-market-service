@@ -1,4 +1,9 @@
 # ---- Fetch libpqxx (postgres C++ lib) ----
+if(APPLE)
+    # Direct CMake to the Homebrew ARM installation of libpq
+    list(APPEND CMAKE_PREFIX_PATH "/opt/homebrew/opt/libpq")
+endif()
+
 FetchContent_Declare(
         libpqxx
         GIT_REPOSITORY https://github.com/jtv/libpqxx.git
