@@ -5,9 +5,8 @@
 #ifndef STOCK_MARKET_SERVICE_CONNECTION_HANDLER_INTERNAL_H
 #define STOCK_MARKET_SERVICE_CONNECTION_HANDLER_INTERNAL_H
 
-#include "dal/connection/postgres_data_store.h"
+#include "dal/store/postgres_data_store.h"
 #include <memory>
-#include <pqxx/connection>
 #include <pqxx/transaction>
 
 namespace dal::store {

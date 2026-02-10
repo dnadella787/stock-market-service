@@ -2,7 +2,7 @@
 // Created by Dhanush Nadella on 2/4/26.
 //
 
-#include "dal/connection/postgres_data_store.h"
+#include "dal/store/postgres_data_store.h"
 #include "connection_handler_internal.h"
 #include <format>
 

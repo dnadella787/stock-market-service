@@ -5,7 +5,7 @@
 #ifndef SECURITY_DAO_H
 #define SECURITY_DAO_H
 
-#include "dal/connection/postgres_data_store.h"
+#include "dal/store/postgres_data_store.h"
 
 namespace dal::dao {
 

@@ -5,7 +5,7 @@
 #ifndef EXCHANGE_DAO_H
 #define EXCHANGE_DAO_H
 
-#include "dal/connection/postgres_data_store.h"
+#include "dal/store/postgres_data_store.h"
 #include "dal/models/exchange.h"
 #include <memory>
 

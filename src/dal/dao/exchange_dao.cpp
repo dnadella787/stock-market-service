@@ -5,7 +5,7 @@
 #include "dal/dao/exchange_dao.h"
 
 #include "../store/connection_handler_internal.h"
-#include "dal/connection/postgres_data_store.h"
+#include "dal/store/postgres_data_store.h"
 #include "dal/exceptions/entity_not_found_exception.h"
 #include <pqxx/transaction>
 
